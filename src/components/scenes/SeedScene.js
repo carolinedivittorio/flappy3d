@@ -44,9 +44,6 @@ class SeedScene extends Scene {
         // this.rotation.y = (rotationSpeed * timeStamp) / 10000;
 
         // Call update for each object in the updateList
-        for (const obj of updateList) {
-            obj.update(timeStamp);
-        }
 
         if (this.state.steps > 150) {
             const newPipe = new Pipe(this);
@@ -54,7 +51,12 @@ class SeedScene extends Scene {
             this.state.steps = 0;
         }
 
-        // var step = this.state.game_state == "active" ? Math.pow(1.02, this.state.score) : 0;
+        var step = this.state.game_state == "active" ? Math.pow(1.02, this.state.score) : 0;
+        this.state.steps += step;
+
+        for (const obj of updateList) {
+            obj.update(timeStamp, step);
+        }
     }
     press() {
         this.children[0].press();
