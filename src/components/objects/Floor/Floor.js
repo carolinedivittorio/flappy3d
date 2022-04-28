@@ -10,7 +10,7 @@ class Floor extends Group {
 
         this.state = {
             height: parent.state.floorHeight,
-            parent: parent,
+            parent: parent
          }
 
         const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 10);
@@ -37,8 +37,15 @@ class Floor extends Group {
     }
 
     update(timeStamp, stepSize) {
-       
-        return false;
+        var birdBox = new THREE.Sphere();
+        var bird = this.state.parent.children[0];
+        birdBox.radius = bird.children[0].geometry.boundingSphere.radius;
+        birdBox.center = bird.position;
+        var floorBox = new THREE.Box3().setFromObject(this.children[0]);
+        var bankBox = new THREE.Box3().setFromObject(this.children[1]);
+        if (birdBox.intersectsBox(floorBox) || birdBox.intersectsBox(bankBox)) {
+            this.parent.kill();
+        }
     }
 }
 

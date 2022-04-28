@@ -1,16 +1,14 @@
-import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
 import { Bird, Pipe, Floor } from 'objects';
 import { BasicLights } from 'lights';
 
 class SeedScene extends Scene {
-    constructor(width, height, document) {
+    constructor(width, height, document, frustum) {
         // Call parent Scene() constructor
         super(width, height);
 
         // Init state
         this.state = {
-            gui: new Dat.GUI(), // Create GUI for scene
             rotationSpeed: 1,
             updateList: [],
             width: width,
@@ -19,6 +17,7 @@ class SeedScene extends Scene {
             document: document,
             gameState: "waiting",
             steps: 0,
+            frustum: frustum,
             floorHeight: -2,
             ceilingHeight: 5,
         };
@@ -29,10 +28,11 @@ class SeedScene extends Scene {
         // Add meshes to scene
         // const pipe = new Pipe(this);
         const bird = new Bird(this);
-        const pipe = new Pipe(this);
+      //  const pipe = new Pipe(this);
         const floor = new Floor(this);
         const lights = new BasicLights();
-        this.add(bird, pipe, floor, lights);
+        this.add(bird, lights);
+        this.add(floor);
 
         // Populate GUI
         // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
@@ -43,10 +43,7 @@ class SeedScene extends Scene {
     }
 
     update(timeStamp) {
-        const { rotationSpeed, updateList } = this.state;
-        // this.rotation.y = (rotationSpeed * timeStamp) / 10000;
-
-        // Call update for each object in the updateList
+            // Call update for each object in the updateList
 
         if (this.state.steps > 150) {
             const newPipe = new Pipe(this);
@@ -59,18 +56,21 @@ class SeedScene extends Scene {
 
         this.state.steps += step;
 
-        for (const obj of updateList) {
+        for (const obj of this.state.updateList) {
             obj.update(timeStamp, step);
         }
 
         this.state.document.getElementById('scoreText').innerHTML = 'Score: ' + this.state.score;
     }
     press() {
-        if (this.state.gameState !== "dead") {
+        if (this.state.gameState !== "dead"){
             this.state.gameState = "active";
             this.children[0].press();
         }
-        
+    }
+
+    isDead() {
+        return this.state.gameState === "dead";
     }
 
     restart() {
@@ -84,10 +84,10 @@ class SeedScene extends Scene {
                 this.remove(children[i]);
             }
             const bird = new Bird(this);
-            const pipe = new Pipe(this);
+       //     const pipe = new Pipe(this);
             const floor = new Floor(this);
             const lights = new BasicLights();
-            this.add(bird, pipe, floor, lights);
+            this.add(bird, floor, lights);
         }
     }
 

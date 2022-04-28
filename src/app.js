@@ -9,15 +9,23 @@
 import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SeedScene } from 'scenes';
+import * as THREE from 'three';
 
 // Initialize core ThreeJS components
-const scene = new SeedScene(960, 960 * window.innerHeight / window.innerWidth, document);
 const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 // Set up camera
-camera.position.set(0, 0, 0.5);
+camera.position.set(0, 0, 12);
 camera.lookAt(new Vector3(0, 0, 0));
+camera.updateMatrix();
+camera.updateMatrixWorld();
+camera.updateProjectionMatrix();
+
+var frustum = new THREE.Frustum();
+frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));  
+console.log(frustum.containsPoint(new THREE.Vector3(0, 1, 0)));
+const scene = new SeedScene(960, 960 * window.innerHeight / window.innerWidth, document, frustum);
 
 // Set up renderer, canvas, and minor CSS adjustments
 renderer.setPixelRatio(window.devicePixelRatio);

@@ -14,17 +14,15 @@ class Bird extends Group {
         // Init state
         this.state = {
             height: parent.state.height,
-            upFlap: 0,
+            tweenCount: 0,
+            frustum: parent.state.frustum,
             parent: parent,
+            upFlap: 0,
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
         const material = new THREE.MeshBasicMaterial({color:0xAA4A44});
         const sphere = new THREE.Mesh(geometry, material);
-        // sphere.scale.set(parent.state.width * 0.03, parent.state.height * 0.04, 1);
-        sphere.position.x = 0;
-        sphere.position.y = 0;
-        sphere.position.z = 0;
         this.add(sphere);
 
         // Add self to parent's update list
@@ -33,45 +31,26 @@ class Bird extends Group {
     }
 
     press() {
-        // this.children[0].position.set(
-        //     this.children[0].position.x, 
-        //     this.children[0].position.y,
-        //     this.children[0].position.z);
-
-        this.state.upFlap = 0.3;
-    
+        const jumpUp = new TWEEN.Tween(this.position)
+            .to({ y: this.position.y + 1 }, 300)
+            .easing(TWEEN.Easing.Quadratic.Out);
+        const fallDown = new TWEEN.Tween(this.position)
+            .to({ y: -this.state.height / 100   }, 1100)
+            .easing(TWEEN.Easing.Quadratic.In);
+        jumpUp.onStart(() => this.state.tweenCount++);
+        jumpUp.onComplete(() => {this.state.tweenCount--; if (this.state.tweenCount === 0) fallDown.start();});
+        // Start animation
+        jumpUp.start();
     }
 
-    // spin() {
-    //     // Add a simple twirl
-    //     this.state.twirl += 6 * Math.PI;
-
-    //     // Use timing library for more precice "bounce" animation
-    //     // TweenJS guide: http://learningthreejs.com/blog/2011/08/17/tweenjs-for-smooth-animation/
-    //     // Possible easings: http://sole.github.io/tween.js/examples/03_graphs.html
-    //     const jumpUp = new TWEEN.Tween(this.position)
-    //         .to({ y: this.position.y + 1 }, 300)
-    //         .easing(TWEEN.Easing.Quadratic.Out);
-    //     const fallDown = new TWEEN.Tween(this.position)
-    //         .to({ y: 0 }, 300)
-    //         .easing(TWEEN.Easing.Quadratic.In);
-
-    //     // Fall down after jumping up
-    //     jumpUp.onComplete(() => fallDown.start());
-
-    //     // Start animation
-    //     jumpUp.start();
-    // }
-
     update(timeStamp) {
-        if (this.parent.state.gameState === "active"){
-            this.children[0].position.set(
-                this.children[0].position.x, 
-                this.children[0].position.y - 0.01 + this.state.upFlap,
-                this.children[0].position.z);
-            this.state.upFlap = Math.max(this.state.upFlap - 0.1, 0);
+        if (this.state.parent.state.gameState !== "active") {
+            return;
         }
-        
+        TWEEN.update();
+        if (!this.state.frustum.containsPoint(this.position)) {
+            this.state.parent.kill();
+        }
     }
 }
 

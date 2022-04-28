@@ -32,6 +32,15 @@ class Pipe extends Group {
         // topPipe.scale.set(parent.state.width * 0.05, topLength, 1);
 
         bottomPipe.position.z = 0;
+
+        // TODO: Julia's changes
+        // bottomPipe.position.x = 5; //parent.state.width / 2. ;
+        // bottomPipe.position.y = -1 - 5/2 + offset; //-parent.state.height / 2. ;
+
+        // topPipe.position.z = 0;
+        // topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
+        // topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
+
         bottomPipe.position.x = 1; //parent.state.width / 2. ;
         bottomPipe.position.y = -1 - this.state.bottomLength/2 + offset; //-parent.state.height / 2. ;
 
@@ -47,40 +56,38 @@ class Pipe extends Group {
     }
 
     update(timeStamp, stepSize) {
-        if (this.parent.state.gameState === "active"){
-            this.children[0].position.set(
-                this.children[0].position.x - 0.01,
-                this.children[0].position.y,
-                this.children[0].position.z
-                );
-            this.children[1].position.set(
-                this.children[1].position.x - 0.01,
-                this.children[1].position.y,
-                this.children[1].position.z
-                );
+        if (this.state.parent.state.gameState !== "active") {
+            return;
         }
 
+        this.children[0].position.set(
+            this.children[0].position.x - 0.01,
+            this.children[0].position.y,
+            this.children[0].position.z
+            );
+        this.children[1].position.set(
+            this.children[1].position.x - 0.01,
+            this.children[1].position.y,
+            this.children[1].position.z
+            );
 
-        var birdBoundingBox = new THREE.Box3().setFromObject(this.parent.children[0]);
+        var birdBox = new THREE.Sphere();
+        birdBox.radius = this.state.bird.children[0].geometry.boundingSphere.radius;
+        birdBox.center = this.state.bird.position;
         var topPipeBox = new THREE.Box3().setFromObject(this.children[0]);
         var bottomPipeBox = new THREE.Box3().setFromObject(this.children[1]);
-        var floorBox = new THREE.Box3().setFromObject(this.parent.children[2]);
-
-        if (birdBoundingBox.intersectsBox(topPipeBox) || birdBoundingBox.intersectsBox(bottomPipeBox)
-            || birdBoundingBox.intersectsBox(floorBox)
-        
-        ) {
+        if (birdBox.intersectsBox(topPipeBox) || birdBox.intersectsBox(bottomPipeBox)) {
             this.parent.kill();
         }
 
-        if (topPipeBox.max.x < birdBoundingBox.min.x) {
+        if (topPipeBox.max.x < birdBox.center.x - birdBox.radius) {
             if (!this.state.scored) {
                 this.state.parent.state.score++;
+                console.log(this.state.parent.state.score);
+           //     this.state.parent.state.document.getElementById('score_text').innerHTML = 'Score: ' + this.state.parent.state.score;
                 this.state.scored = true;
             }
         }
-
-        return false;
     }
 }
 
