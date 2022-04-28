@@ -25,8 +25,10 @@ class Pipe extends Group {
         const pipeMaterial = new THREE.MeshPhongMaterial({color: 0x228b22, specular: 0xCCCCCC, shininess: 5});
         const bottomPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, this.state.bottomLength, 32);
         const bottomPipe = new THREE.Mesh(bottomPipeGeometry, pipeMaterial);
+        bottomPipe.castShadow = true;
         const bottomPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, this.state.bottomLength / 20, 32);
         const bottomPipeHat = new THREE.Mesh(bottomPipeGeometryHat, pipeMaterial);
+        bottomPipe.castShadow = true;
 
 
         // bottomPipe.scale.set(parent.state.height * 0.05, this.state.bottomLength, 1);
@@ -36,6 +38,8 @@ class Pipe extends Group {
         const topPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, topLength / 20, 32);
         const topPipeHat = new THREE.Mesh(topPipeGeometryHat, pipeMaterial);
         // topPipe.scale.set(parent.state.width * 0.05, topLength, 1);
+        topPipe.castShadow = true;
+        topPipeHat.castShadow = true;
 
         bottomPipe.position.z = 0;
 

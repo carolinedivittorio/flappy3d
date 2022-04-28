@@ -31,18 +31,19 @@ class SeedScene extends Scene {
         const bird = new Bird(this);
       //  const pipe = new Pipe(this);
         const floor = new Floor(this);
-        const lights = new BasicLights();
+        // const lights = new BasicLights();
         this.add(bird);
         this.add(floor);
 
-        var ambLight = new THREE.AmbientLight(0xffffff);
-        this.add(ambLight);
+        // var ambLight = new THREE.AmbientLight(0xffffff);
+        // this.add(ambLight);
     
         var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                          0.3);
+                                                          0.7);
         directionalLight.position.set( 0, 
                                        2, 
                                        4); 
+        directionalLight.castShadow = true;
         this.add(directionalLight);
 
         // Populate GUI
@@ -86,6 +87,8 @@ class SeedScene extends Scene {
 
     restart() {
         if (this.state.gameState === "dead") {
+            var bestScore = document.cookie==="" ? 0 : document.cookie.split('=')[1];
+            this.state.document.getElementById('bestScoreText').innerHTML = 'Best: ' + bestScore;
             this.state.updateList = [];
             this.state.score = 0;
             this.state.gameState = "waiting";
@@ -96,20 +99,21 @@ class SeedScene extends Scene {
             }
             const bird = new Bird(this);
             //  const pipe = new Pipe(this);
-              const floor = new Floor(this);
-              const lights = new BasicLights();
-              this.add(bird);
-              this.add(floor);
+            const floor = new Floor(this);
+            //   const lights = new BasicLights();
+            this.add(bird);
+            this.add(floor);
       
-              var ambLight = new THREE.AmbientLight(0xffffff);
-              this.add(ambLight);
+            //   var ambLight = new THREE.AmbientLight(0xffffff);
+            //   this.add(ambLight);
           
-              var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                                0.3);
-              directionalLight.position.set( 0, 
+            var directionalLight = new THREE.DirectionalLight(0xffffff,
+                                                                0.7);
+            directionalLight.position.set( 0, 
                                              2, 
                                              4); 
-              this.add(directionalLight);
+            directionalLight.castShadow = true;
+            this.add(directionalLight);
         }
     }
 
@@ -119,6 +123,13 @@ class SeedScene extends Scene {
 
     kill() {
         this.state.gameState = "dead";
+        if (this.state.document.cookie === "") {
+            this.state.document.cookie = "bestScore=0";
+        } else {
+            if (parseInt(this.state.document.cookie.split('=')[1]) < this.state.score) {
+                this.state.document.cookie = "bestScore=" + this.state.score;
+            }
+        }
     }
 }
 

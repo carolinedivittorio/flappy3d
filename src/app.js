@@ -15,6 +15,9 @@ import * as THREE from 'three';
 const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 // Set up camera
 camera.position.set(0, 0, 12);
 camera.lookAt(new Vector3(0, 0, 0));
@@ -45,7 +48,16 @@ scoreText.style.left = 0.86 * window.innerWidth + 'px';
 scoreText.id = "scoreText";
 document.body.appendChild(scoreText);
 
-
+var bestScoreText = document.createElement('div');
+bestScoreText.style.position = 'absolute';
+bestScoreText.style.width = 100;
+bestScoreText.style.height = 100;
+var bestScore = document.cookie === "" ? 0 : parseInt(document.cookie.split("=")[1]);
+bestScoreText.innerHTML = 'Best: ' + bestScore;
+bestScoreText.style.top = 0.13 * window.innerHeight + 'px';
+bestScoreText.style.left = 0.86 * window.innerWidth + 'px';
+bestScoreText.id = "bestScoreText";
+document.body.appendChild(bestScoreText);
 
 
 
