@@ -1,4 +1,5 @@
 import { Scene, Color } from 'three';
+import * as THREE from 'three';
 import { Bird, Pipe, Floor } from 'objects';
 import { BasicLights } from 'lights';
 
@@ -31,8 +32,18 @@ class SeedScene extends Scene {
       //  const pipe = new Pipe(this);
         const floor = new Floor(this);
         const lights = new BasicLights();
-        this.add(bird, lights);
+        this.add(bird);
         this.add(floor);
+
+        var ambLight = new THREE.AmbientLight(0xffffff);
+        this.add(ambLight);
+    
+        var directionalLight = new THREE.DirectionalLight(0xffffff,
+                                                          0.3);
+        directionalLight.position.set( 0, 
+                                       2, 
+                                       4); 
+        this.add(directionalLight);
 
         // Populate GUI
         // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
@@ -84,10 +95,21 @@ class SeedScene extends Scene {
                 this.remove(children[i]);
             }
             const bird = new Bird(this);
-       //     const pipe = new Pipe(this);
-            const floor = new Floor(this);
-            const lights = new BasicLights();
-            this.add(bird, floor, lights);
+            //  const pipe = new Pipe(this);
+              const floor = new Floor(this);
+              const lights = new BasicLights();
+              this.add(bird);
+              this.add(floor);
+      
+              var ambLight = new THREE.AmbientLight(0xffffff);
+              this.add(ambLight);
+          
+              var directionalLight = new THREE.DirectionalLight(0xffffff,
+                                                                0.3);
+              directionalLight.position.set( 0, 
+                                             2, 
+                                             4); 
+              this.add(directionalLight);
         }
     }
 

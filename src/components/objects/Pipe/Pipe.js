@@ -22,7 +22,7 @@ class Pipe extends Group {
         this.state.bottomLength = offset - 1 - parent.state.floorHeight;
         const topLength = parent.state.ceilingHeight - offset - 1;
 
-        const pipeMaterial = new THREE.MeshBasicMaterial({color: 0x228b22});
+        const pipeMaterial = new THREE.MeshPhongMaterial({color: 0x228b22, specular: 0xCCCCCC, shininess: 5});
         const bottomPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, this.state.bottomLength, 32);
         const bottomPipe = new THREE.Mesh(bottomPipeGeometry, pipeMaterial);
         const bottomPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, this.state.bottomLength / 20, 32);
@@ -47,17 +47,17 @@ class Pipe extends Group {
         // topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
         // topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
 
-        bottomPipe.position.x = 1; //parent.state.width / 2. ;
+        bottomPipe.position.x = 5; //parent.state.width / 2. ;
         bottomPipe.position.y = -1 - this.state.bottomLength/2 + offset; //-parent.state.height / 2. ;
         bottomPipeHat.position.z = 0;
-        bottomPipeHat.position.x = 1;
+        bottomPipeHat.position.x = 5;
         bottomPipeHat.position.y = bottomPipe.position.y + this.state.bottomLength / 2 + this.state.bottomLength / 40;
 
         topPipe.position.z = 0;
-        topPipe.position.x = 1; //parent.state.width / 2. + topPipe.scale.x;
+        topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
         topPipe.position.y = 1 + topLength/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
         topPipeHat.position.z = 0;
-        topPipeHat.position.x = 1;
+        topPipeHat.position.x = 5;
         topPipeHat.position.y = topPipe.position.y - topLength / 2 - topLength / 40;
 
         this.add(bottomPipe);
