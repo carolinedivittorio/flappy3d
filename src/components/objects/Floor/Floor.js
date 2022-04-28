@@ -14,8 +14,9 @@ class Floor extends Group {
          }
 
         const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 10);
-        const floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+        const floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
         const floor = new THREE.Mesh( floorGeometry, floorMaterial );
+        floor.receiveShadow = true;
         console.log(floor.position);
         floor.position.x = 0;
         floor.position.y = this.state.height - 0.1;
@@ -23,7 +24,7 @@ class Floor extends Group {
         this.add(floor);
 
         const bankGeometry = new THREE.BoxGeometry(10000, 10000, 0.2);
-        const bankMaterial = new THREE.MeshBasicMaterial( {color: 0x113b08} );
+        const bankMaterial = new THREE.MeshStandardMaterial( {color: 0x113b08} );
         const bank = new THREE.Mesh( bankGeometry, bankMaterial );
         bank.position.x = 0;
         bank.position.y = -5000 + floor.position.y - 0.1;

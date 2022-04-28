@@ -15,6 +15,9 @@ import * as THREE from 'three';
 const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 // Set up camera
 camera.position.set(0, 0, 12);
 camera.lookAt(new Vector3(0, 0, 0));

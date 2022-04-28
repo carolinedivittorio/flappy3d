@@ -31,18 +31,19 @@ class SeedScene extends Scene {
         const bird = new Bird(this);
       //  const pipe = new Pipe(this);
         const floor = new Floor(this);
-        const lights = new BasicLights();
+        // const lights = new BasicLights();
         this.add(bird);
         this.add(floor);
 
-        var ambLight = new THREE.AmbientLight(0xffffff);
-        this.add(ambLight);
+        // var ambLight = new THREE.AmbientLight(0xffffff);
+        // this.add(ambLight);
     
         var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                          0.3);
+                                                          0.7);
         directionalLight.position.set( 0, 
                                        2, 
                                        4); 
+        directionalLight.castShadow = true;
         this.add(directionalLight);
 
         // Populate GUI
@@ -98,20 +99,21 @@ class SeedScene extends Scene {
             }
             const bird = new Bird(this);
             //  const pipe = new Pipe(this);
-              const floor = new Floor(this);
-              const lights = new BasicLights();
-              this.add(bird);
-              this.add(floor);
+            const floor = new Floor(this);
+            //   const lights = new BasicLights();
+            this.add(bird);
+            this.add(floor);
       
-              var ambLight = new THREE.AmbientLight(0xffffff);
-              this.add(ambLight);
+            //   var ambLight = new THREE.AmbientLight(0xffffff);
+            //   this.add(ambLight);
           
-              var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                                0.3);
-              directionalLight.position.set( 0, 
+            var directionalLight = new THREE.DirectionalLight(0xffffff,
+                                                                0.7);
+            directionalLight.position.set( 0, 
                                              2, 
                                              4); 
-              this.add(directionalLight);
+            directionalLight.castShadow = true;
+            this.add(directionalLight);
         }
     }
 
