@@ -1,5 +1,5 @@
 import { Scene, Color } from 'three';
-import { Bird, Pipe } from 'objects';
+import { Bird, Pipe, Floor } from 'objects';
 import { BasicLights } from 'lights';
 
 class SeedScene extends Scene {
@@ -15,9 +15,11 @@ class SeedScene extends Scene {
             height: height,
             score: 0,
             document: document,
-            game_state: "waiting",
+            gameState: "waiting",
             steps: 0,
-            frustum: frustum
+            frustum: frustum,
+            floorHeight: -2,
+            ceilingHeight: 5,
         };
 
         // Set background to a nice color
@@ -26,10 +28,15 @@ class SeedScene extends Scene {
         // Add meshes to scene
         // const pipe = new Pipe(this);
         const bird = new Bird(this);
-        
+      //  const pipe = new Pipe(this);
+        const floor = new Floor(this);
         const lights = new BasicLights();
         this.add(bird, lights);
- }
+        this.add(floor);
+
+        // Populate GUI
+        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
+    }
 
     addToUpdateList(object) {
         this.state.updateList.push(object);
@@ -44,43 +51,52 @@ class SeedScene extends Scene {
             this.state.steps = 0;
         }
 
-        var step = this.state.game_state == "active" ? Math.pow(1.02, this.state.score) : 0;
+
+        var step = this.state.gameState === "active" ? Math.pow(1.02, this.state.score) : 0;
+
         this.state.steps += step;
 
         for (const obj of this.state.updateList) {
             obj.update(timeStamp, step);
         }
+
+        this.state.document.getElementById('scoreText').innerHTML = 'Score: ' + this.state.score;
     }
     press() {
-        if (this.state.game_state !== "dead"){
-            this.state.game_state = "active";
+        if (this.state.gameState !== "dead"){
+            this.state.gameState = "active";
             this.children[0].press();
         }
     }
 
     isDead() {
-        return this.state.game_state === "dead";
+        return this.state.gameState === "dead";
     }
 
     restart() {
-        if (this.state.game_state === "dead") {
+        if (this.state.gameState === "dead") {
             this.state.updateList = [];
             this.state.score = 0;
-            this.state.game_state = "waiting";
+            this.state.gameState = "waiting";
+            this.state.steps = 0;
             var children = [...this.children];
             for (var i = 0; i < children.length; i++) {
                 this.remove(children[i]);
             }
             const bird = new Bird(this);
+       //     const pipe = new Pipe(this);
+            const floor = new Floor(this);
             const lights = new BasicLights();
-            this.add(bird, lights);
+            this.add(bird, floor, lights);
         }
     }
 
+    isDead() {
+        return this.state.gameState === "dead";
+    }
+
     kill() {
-        //const gameOver = new Score(this);
-        //this.add(gameOver);
-        this.state.game_state = "dead";
+        this.state.gameState = "dead";
     }
 }
 

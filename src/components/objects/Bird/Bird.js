@@ -16,7 +16,8 @@ class Bird extends Group {
             height: parent.state.height,
             tweenCount: 0,
             frustum: parent.state.frustum,
-            parent: parent
+            parent: parent,
+            upFlap: 0,
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
@@ -34,7 +35,7 @@ class Bird extends Group {
             .to({ y: this.position.y + 1 }, 300)
             .easing(TWEEN.Easing.Quadratic.Out);
         const fallDown = new TWEEN.Tween(this.position)
-            .to({ y: -this.state.height / 100   }, 900)
+            .to({ y: -this.state.height / 100   }, 1100)
             .easing(TWEEN.Easing.Quadratic.In);
         jumpUp.onStart(() => this.state.tweenCount++);
         jumpUp.onComplete(() => {this.state.tweenCount--; if (this.state.tweenCount === 0) fallDown.start();});
@@ -43,7 +44,7 @@ class Bird extends Group {
     }
 
     update(timeStamp) {
-        if (this.state.parent.state.game_state !== "active") {
+        if (this.state.parent.state.gameState !== "active") {
             return;
         }
         TWEEN.update();

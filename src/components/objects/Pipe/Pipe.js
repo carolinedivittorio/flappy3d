@@ -16,27 +16,37 @@ class Pipe extends Group {
             scored: false
          }
     
-        this.state.bottomLength = (parent.state.height * 0.2 + Math.random() * parent.state.height * 0.4) * 0.8;
-        const topLength = (parent.state.height * 0.8 - this.state.bottomLength) * 0.8;
+        const offset = Math.random() * 2 - 1; // middle between pipes
+        // top pipe should start at offset + 1
+        // bottom pipe should end at offset - 1
+        this.state.bottomLength = offset - 1 - parent.state.floorHeight;
+        const topLength = parent.state.ceilingHeight - offset - 1;
 
         const pipeMaterial = new THREE.MeshBasicMaterial({color: 0x228b22});
-        const bottomPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, 5, 32);
+        const bottomPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, this.state.bottomLength, 32);
         const bottomPipe = new THREE.Mesh(bottomPipeGeometry, pipeMaterial);
         // bottomPipe.scale.set(parent.state.height * 0.05, this.state.bottomLength, 1);
 
-        const topPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, 5, 32);
+        const topPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, topLength, 32);
         const topPipe = new THREE.Mesh(topPipeGeometry, pipeMaterial);
         // topPipe.scale.set(parent.state.width * 0.05, topLength, 1);
 
-        const offset = Math.random() * 2 - 1;
-        console.log(offset);
         bottomPipe.position.z = 0;
-        bottomPipe.position.x = 5; //parent.state.width / 2. ;
-        bottomPipe.position.y = -1 - 5/2 + offset; //-parent.state.height / 2. ;
+
+        // TODO: Julia's changes
+        // bottomPipe.position.x = 5; //parent.state.width / 2. ;
+        // bottomPipe.position.y = -1 - 5/2 + offset; //-parent.state.height / 2. ;
+
+        // topPipe.position.z = 0;
+        // topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
+        // topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
+
+        bottomPipe.position.x = 1; //parent.state.width / 2. ;
+        bottomPipe.position.y = -1 - this.state.bottomLength/2 + offset; //-parent.state.height / 2. ;
 
         topPipe.position.z = 0;
-        topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
-        topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
+        topPipe.position.x = 1; //parent.state.width / 2. + topPipe.scale.x;
+        topPipe.position.y = 1 + topLength/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
 
         this.add(bottomPipe);
         this.add(topPipe);
@@ -46,7 +56,7 @@ class Pipe extends Group {
     }
 
     update(timeStamp, stepSize) {
-        if (this.state.parent.state.game_state !== "active") {
+        if (this.state.parent.state.gameState !== "active") {
             return;
         }
 
