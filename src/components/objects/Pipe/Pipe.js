@@ -31,11 +31,11 @@ class Pipe extends Group {
         const offset = Math.random() * 2 - 1;
         console.log(offset);
         bottomPipe.position.z = 0;
-        bottomPipe.position.x = 1; //parent.state.width / 2. ;
+        bottomPipe.position.x = 5; //parent.state.width / 2. ;
         bottomPipe.position.y = -1 - 5/2 + offset; //-parent.state.height / 2. ;
 
         topPipe.position.z = 0;
-        topPipe.position.x = 1; //parent.state.width / 2. + topPipe.scale.x;
+        topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
         topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
 
         this.add(bottomPipe);
@@ -46,7 +46,10 @@ class Pipe extends Group {
     }
 
     update(timeStamp, stepSize) {
-        console.log("pipeMoving");
+        if (this.state.parent.state.game_state !== "active") {
+            return;
+        }
+
         this.children[0].position.set(
             this.children[0].position.x - 0.01,
             this.children[0].position.y,
@@ -57,6 +60,24 @@ class Pipe extends Group {
             this.children[1].position.y,
             this.children[1].position.z
             );
+
+        var birdBox = new THREE.Sphere();
+        birdBox.radius = this.state.bird.children[0].geometry.boundingSphere.radius;
+        birdBox.center = this.state.bird.position;
+        var topPipeBox = new THREE.Box3().setFromObject(this.children[0]);
+        var bottomPipeBox = new THREE.Box3().setFromObject(this.children[1]);
+        if (birdBox.intersectsBox(topPipeBox) || birdBox.intersectsBox(bottomPipeBox)) {
+            this.parent.kill();
+        }
+
+        if (topPipeBox.max.x < birdBox.center.x - birdBox.radius) {
+            if (!this.state.scored) {
+                this.state.parent.state.score++;
+                console.log(this.state.parent.state.score);
+           //     this.state.parent.state.document.getElementById('score_text').innerHTML = 'Score: ' + this.state.parent.state.score;
+                this.state.scored = true;
+            }
+        }
     }
 }
 
