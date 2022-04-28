@@ -18,15 +18,20 @@ class Bird extends Group {
             frustum: parent.state.frustum,
             parent: parent,
             upFlap: 0,
+            clamped: false
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
         const material = new THREE.MeshPhongMaterial({color:0xAA4A44, specular: 0xCCCCCC, shininess: 5});
         const sphere = new THREE.Mesh(geometry, material);
+        sphere.receiveShadow = true;
+        sphere.castShadow = true;
         this.add(sphere);
 
         // Add self to parent's update list
         parent.addToUpdateList(this);
+        this.receiveShadow = true;
+        this.castShadow = true;
 
     }
 
@@ -44,13 +49,20 @@ class Bird extends Group {
     }
 
     update(timeStamp) {
-        if (this.state.parent.state.gameState !== "active") {
+        // if (this.state.parent.state.gameState !== "active") {
+        //     return;
+        // }
+        if (this.state.clamped) {
             return;
         }
         TWEEN.update();
         if (!this.state.frustum.containsPoint(this.position)) {
             this.state.parent.kill();
         }
+    }
+
+    clamp() {
+        this.state.clamped = true;
     }
 }
 

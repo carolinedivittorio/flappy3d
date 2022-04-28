@@ -64,6 +64,7 @@ class Pipe extends Group {
         this.add(bottomPipeHat);
         this.add(topPipe);
         this.add(topPipeHat);
+        this.castShadow = true;
 
         parent.addToUpdateList(this);
 

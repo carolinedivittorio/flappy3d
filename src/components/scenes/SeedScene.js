@@ -38,15 +38,28 @@ class SeedScene extends Scene {
         var ambLight = new THREE.AmbientLight(0xffffff);
         this.add(ambLight);
     
-        var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                          0.3);
-        directionalLight.position.set( 0, 
-                                       2, 
-                                       4); 
-        this.add(directionalLight);
+        // var directionalLight = new THREE.DirectionalLight(0xffffff,
+        //                                                   0.3);
+        // directionalLight.position.set(0, 2, 4); 
+        // directionalLight.castShadow = true;
+        // this.add(directionalLight);
 
-        // Populate GUI
-        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
+        const spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( 500, 1000, 100 );
+
+        spotLight.castShadow = true;
+
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+
+        spotLight.shadow.camera.near = 500;
+        spotLight.shadow.camera.far = 4000;
+        spotLight.shadow.camera.fov = 30;
+
+        this.add( spotLight );
+
+        const cameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+this.add(cameraHelper);
     }
 
     addToUpdateList(object) {
@@ -104,12 +117,29 @@ class SeedScene extends Scene {
               var ambLight = new THREE.AmbientLight(0xffffff);
               this.add(ambLight);
           
-              var directionalLight = new THREE.DirectionalLight(0xffffff,
-                                                                0.3);
-              directionalLight.position.set( 0, 
-                                             2, 
-                                             4); 
-              this.add(directionalLight);
+//               var directionalLight = new THREE.DirectionalLight(0xffffff,
+//                 0.3);
+// directionalLight.position.set(0, 2, 4); 
+// directionalLight.castShadow = true;
+// this.add(directionalLight);
+
+const spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 500, 1000, 100 );
+
+spotLight.castShadow = true;
+spotLight.shadowDarkness = 0.5;
+
+// spotLight.shadow.mapSize.width = 1024;
+// spotLight.shadow.mapSize.height = 1024;
+
+// spotLight.shadow.camera.near = 500;
+// spotLight.shadow.camera.far = 4000;
+// spotLight.shadow.camera.fov = 30;
+
+this.add( spotLight );
+
+const cameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+this.add(cameraHelper);
         }
     }
 

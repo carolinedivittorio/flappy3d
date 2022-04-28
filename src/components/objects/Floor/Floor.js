@@ -14,24 +14,26 @@ class Floor extends Group {
          }
 
         const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 10);
-        const floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+        const floorMaterial = new THREE.MeshPhongMaterial( {color: 0x00ff00, specular: 0xCCCCCC, shininess: 5} );
         const floor = new THREE.Mesh( floorGeometry, floorMaterial );
         console.log(floor.position);
         floor.position.x = 0;
         floor.position.y = this.state.height - 0.1;
         floor.position.z = -4;
+        floor.receiveShadow = true;
         this.add(floor);
 
         const bankGeometry = new THREE.BoxGeometry(10000, 10000, 0.2);
-        const bankMaterial = new THREE.MeshBasicMaterial( {color: 0x113b08} );
+        const bankMaterial = new THREE.MeshPhongMaterial( {color: 0x113b08} );
         const bank = new THREE.Mesh( bankGeometry, bankMaterial );
         bank.position.x = 0;
         bank.position.y = -5000 + floor.position.y - 0.1;
         bank.position.z = 0.5;
+        bank.receiveShadow = true;
         this.add(bank)
     
         
-
+         this.receiveShadow = true;
         parent.addToUpdateList(this);
 
     }
@@ -45,6 +47,7 @@ class Floor extends Group {
         var bankBox = new THREE.Box3().setFromObject(this.children[1]);
         if (birdBox.intersectsBox(floorBox) || birdBox.intersectsBox(bankBox)) {
             this.parent.kill();
+            bird.clamp();
         }
     }
 }
