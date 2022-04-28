@@ -15,6 +15,7 @@ class Bird extends Group {
         this.state = {
             height: parent.state.height,
             upFlap: 0,
+            parent: parent,
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
@@ -63,11 +64,14 @@ class Bird extends Group {
     // }
 
     update(timeStamp) {
-        this.children[0].position.set(
-            this.children[0].position.x, 
-            this.children[0].position.y - 0.01 + this.state.upFlap,
-            this.children[0].position.z);
-        this.state.upFlap = Math.max(this.state.upFlap - 0.1, 0);
+        if (this.parent.state.gameState === "active"){
+            this.children[0].position.set(
+                this.children[0].position.x, 
+                this.children[0].position.y - 0.01 + this.state.upFlap,
+                this.children[0].position.z);
+            this.state.upFlap = Math.max(this.state.upFlap - 0.1, 0);
+        }
+        
     }
 }
 

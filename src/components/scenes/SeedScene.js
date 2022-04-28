@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Bird, Pipe } from 'objects';
+import { Bird, Pipe, Floor } from 'objects';
 import { BasicLights } from 'lights';
 
 class SeedScene extends Scene {
@@ -17,8 +17,10 @@ class SeedScene extends Scene {
             height: height,
             score: 0,
             document: document,
-            game_state: "waiting",
+            gameState: "waiting",
             steps: 0,
+            floorHeight: -2,
+            ceilingHeight: 5,
         };
 
         // Set background to a nice color
@@ -28,8 +30,9 @@ class SeedScene extends Scene {
         // const pipe = new Pipe(this);
         const bird = new Bird(this);
         const pipe = new Pipe(this);
+        const floor = new Floor(this);
         const lights = new BasicLights();
-        this.add(bird, pipe, lights);
+        this.add(bird, pipe, floor, lights);
 
         // Populate GUI
         // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
@@ -51,15 +54,49 @@ class SeedScene extends Scene {
             this.state.steps = 0;
         }
 
-        var step = this.state.game_state == "active" ? Math.pow(1.02, this.state.score) : 0;
+
+        var step = this.state.gameState === "active" ? Math.pow(1.02, this.state.score) : 0;
+
         this.state.steps += step;
 
         for (const obj of updateList) {
             obj.update(timeStamp, step);
         }
+
+        this.state.document.getElementById('scoreText').innerHTML = 'Score: ' + this.state.score;
     }
     press() {
-        this.children[0].press();
+        if (this.state.gameState !== "dead") {
+            this.state.gameState = "active";
+            this.children[0].press();
+        }
+        
+    }
+
+    restart() {
+        if (this.state.gameState === "dead") {
+            this.state.updateList = [];
+            this.state.score = 0;
+            this.state.gameState = "waiting";
+            this.state.steps = 0;
+            var children = [...this.children];
+            for (var i = 0; i < children.length; i++) {
+                this.remove(children[i]);
+            }
+            const bird = new Bird(this);
+            const pipe = new Pipe(this);
+            const floor = new Floor(this);
+            const lights = new BasicLights();
+            this.add(bird, pipe, floor, lights);
+        }
+    }
+
+    isDead() {
+        return this.state.gameState === "dead";
+    }
+
+    kill() {
+        this.state.gameState = "dead";
     }
 }
 

@@ -27,6 +27,20 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
+var scoreText = document.createElement('div');
+scoreText.style.position = 'absolute';
+scoreText.style.width = 100;
+scoreText.style.height = 100;
+scoreText.innerHTML = 'Score: 0';
+scoreText.style.top = 0.09 * window.innerHeight + 'px';
+scoreText.style.left = 0.86 * window.innerWidth + 'px';
+scoreText.id = "scoreText";
+document.body.appendChild(scoreText);
+
+
+
+
+
 // Set up controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
@@ -57,6 +71,13 @@ window.addEventListener('resize', windowResizeHandler, false);
 document.body.onkeyup = function(e) {
     if (e.key == ' ') {
         scene.press();
-    } 
+    } else if (e.key == 'x') {
+        if (scene.isDead()) {
+            scene.restart();
+            document.getElementById('scoreText').innerHTML = 'Score: 0';
+
+        }
+    }
+
 
 }
