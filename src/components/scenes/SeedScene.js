@@ -86,6 +86,8 @@ class SeedScene extends Scene {
 
     restart() {
         if (this.state.gameState === "dead") {
+            var bestScore = document.cookie==="" ? 0 : document.cookie.split('=')[1];
+            this.state.document.getElementById('bestScoreText').innerHTML = 'Best: ' + bestScore;
             this.state.updateList = [];
             this.state.score = 0;
             this.state.gameState = "waiting";
@@ -119,6 +121,13 @@ class SeedScene extends Scene {
 
     kill() {
         this.state.gameState = "dead";
+        if (this.state.document.cookie === "") {
+            this.state.document.cookie = "bestScore=0";
+        } else {
+            if (parseInt(this.state.document.cookie.split('=')[1]) < this.state.score) {
+                this.state.document.cookie = "bestScore=" + this.state.score;
+            }
+        }
     }
 }
 
