@@ -21,7 +21,7 @@ class Bird extends Group {
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
-        const material = new THREE.MeshBasicMaterial({color:0xAA4A44});
+        const material = new THREE.MeshPhongMaterial({color:0xAA4A44, specular: 0xCCCCCC, shininess: 5});
         const sphere = new THREE.Mesh(geometry, material);
         this.add(sphere);
 
