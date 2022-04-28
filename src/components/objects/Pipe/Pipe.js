@@ -79,7 +79,7 @@ class Pipe extends Group {
         var box;
         for (var i = 0; i < this.children.length; i++) {
             this.children[i].position.set(
-                this.children[i].position.x - 0.01,
+                this.children[i].position.x - stepSize,
                 this.children[i].position.y,
                 this.children[i].position.z
                 );

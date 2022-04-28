@@ -44,6 +44,7 @@ class Floor extends Group {
         var floorBox = new THREE.Box3().setFromObject(this.children[0]);
         var bankBox = new THREE.Box3().setFromObject(this.children[1]);
         if (birdBox.intersectsBox(floorBox) || birdBox.intersectsBox(bankBox)) {
+            bird.stop();
             this.parent.kill();
         }
     }

@@ -18,6 +18,7 @@ class Bird extends Group {
             frustum: parent.state.frustum,
             parent: parent,
             upFlap: 0,
+            stopped: false
         };
 
         const geometry = new THREE.SphereGeometry(0.1, 32, 16);
@@ -31,6 +32,9 @@ class Bird extends Group {
     }
 
     press() {
+        if (this.state.parent.state.gameState === "dead") {
+            return;
+        }
         const jumpUp = new TWEEN.Tween(this.position)
             .to({ y: this.position.y + 1 }, 300)
             .easing(TWEEN.Easing.Quadratic.Out);
@@ -44,13 +48,17 @@ class Bird extends Group {
     }
 
     update(timeStamp) {
-        if (this.state.parent.state.gameState !== "active") {
+        if (this.state.stopped) {
             return;
         }
         TWEEN.update();
         if (!this.state.frustum.containsPoint(this.position)) {
             this.state.parent.kill();
         }
+    }
+
+    stop() {
+        this.state.stopped = true;
     }
 }
 

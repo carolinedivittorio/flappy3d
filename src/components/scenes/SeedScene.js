@@ -56,14 +56,14 @@ class SeedScene extends Scene {
     update(timeStamp) {
             // Call update for each object in the updateList
 
-        if (this.state.steps > 150) {
+        if (this.state.steps > 2) {
             const newPipe = new Pipe(this);
             this.add(newPipe);
             this.state.steps = 0;
         }
 
 
-        var step = this.state.gameState === "active" ? Math.pow(1.02, this.state.score) : 0;
+        var step = this.state.gameState === "active" ? 0.01 * Math.pow(1.035, this.state.score) : 0;
 
         this.state.steps += step;
 

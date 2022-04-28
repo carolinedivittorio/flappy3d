@@ -72,6 +72,8 @@ const windowResizeHandler = () => {
     renderer.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
+    scoreText.style.top = 0.09 * window.innerHeight + 'px';
+    scoreText.style.left = 0.86 * window.innerWidth + 'px';
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
