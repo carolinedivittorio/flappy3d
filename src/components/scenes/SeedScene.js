@@ -1,6 +1,6 @@
 import { Scene, Color } from 'three';
 import * as THREE from 'three';
-import { Bird, Pipe, Floor } from 'objects';
+import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
 
 class SeedScene extends Scene {
@@ -34,6 +34,9 @@ class SeedScene extends Scene {
         // const lights = new BasicLights();
         this.add(bird);
         this.add(floor);
+
+        const cloud = new Cloud(this);
+        this.add(cloud);
 
         // var ambLight = new THREE.AmbientLight(0xffffff);
         // this.add(ambLight);
@@ -103,6 +106,8 @@ class SeedScene extends Scene {
             //   const lights = new BasicLights();
             this.add(bird);
             this.add(floor);
+            const cloud = new Cloud(this);
+            this.add(cloud);
       
             //   var ambLight = new THREE.AmbientLight(0xffffff);
             //   this.add(ambLight);
