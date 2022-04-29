@@ -21,6 +21,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 // Set up camera
 camera.position.set(0, 0, 12);
 camera.lookAt(new Vector3(0, 0, 0));
+camera.zoom = 2;
 camera.updateMatrix();
 camera.updateMatrixWorld();
 camera.updateProjectionMatrix();
@@ -75,6 +76,7 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
+ 
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
 

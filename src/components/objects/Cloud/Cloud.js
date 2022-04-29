@@ -15,7 +15,7 @@ class Cloud extends Group {
                 });
                 model.scale.set(Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25);
                 model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
-                model.position.x = this.state.x + 30;
+                model.position.x = this.state.x + 20;
                 model.position.y = Math.random() * 2 - 1;
                 this.add(model);
             }
@@ -41,9 +41,9 @@ class Cloud extends Group {
     }
 
     update(timeStamp) {
-        var step = 0.01;
+        var step = 0.013;
         if (this.state.parent.state.gameState !== "active") {
-            step = 0.0001;
+            step = 0.003;
         }
         if (this.state.cloudTime === 0) {
             this.addCloud();

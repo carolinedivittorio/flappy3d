@@ -51,17 +51,17 @@ class Pipe extends Group {
         // topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
         // topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
 
-        bottomPipe.position.x = 5; //parent.state.width / 2. ;
+        bottomPipe.position.x = 7; //parent.state.width / 2. ;
         bottomPipe.position.y = -1 - this.state.bottomLength/2 + offset; //-parent.state.height / 2. ;
         bottomPipeHat.position.z = 0;
-        bottomPipeHat.position.x = 5;
+        bottomPipeHat.position.x = 7;
         bottomPipeHat.position.y = bottomPipe.position.y + this.state.bottomLength / 2 + this.state.bottomLength / 40;
 
         topPipe.position.z = 0;
-        topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
+        topPipe.position.x = 7; //parent.state.width / 2. + topPipe.scale.x;
         topPipe.position.y = 1 + topLength/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
         topPipeHat.position.z = 0;
-        topPipeHat.position.x = 5;
+        topPipeHat.position.x = 7;
         topPipeHat.position.y = topPipe.position.y - topLength / 2 - topLength / 40;
 
         this.add(bottomPipe);
