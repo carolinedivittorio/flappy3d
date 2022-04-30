@@ -1,4 +1,4 @@
-import { Group } from 'three';
+import { Group, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
 import MODEL from './bird.gltf';
@@ -61,11 +61,17 @@ class Bird extends Group {
         const jumpUp = new TWEEN.Tween(this.position)
             .to({ y: this.position.y + 1 }, 300)
             .easing(TWEEN.Easing.Quadratic.Out);
+        const jumpAround = new TWEEN.Tween(this.rotation)
+            .to({z : Math.PI * 1/8}, 300)
+            .easing(TWEEN.Easing.Quadratic.Out);
         const fallDown = new TWEEN.Tween(this.position)
             .to({ y: -this.state.height / 100   }, 1100)
             .easing(TWEEN.Easing.Quadratic.In);
-        jumpUp.onStart(() => this.state.tweenCount++);
-        jumpUp.onComplete(() => {this.state.tweenCount--; if (this.state.tweenCount === 0) fallDown.start();});
+        const fallOver = new TWEEN.Tween(this.rotation)
+            .to({z: -Math.PI * 1 / 8}, 300)
+            .easing(TWEEN.Easing.Quadratic.In);
+        jumpUp.onStart(() => {this.state.tweenCount++; if (this.state.tweenCount === 1) jumpAround.start();});
+        jumpUp.onComplete(() => {this.state.tweenCount--; if (this.state.tweenCount === 0) {fallOver.start(); fallDown.start();}});
         // Start animation
         jumpUp.start();
     }
@@ -83,7 +89,7 @@ class Bird extends Group {
             this.state.isVisible = 1 - this.state.isVisible;
         }
         this.state.untilFlap++;
-      //  console.log(this.position);
+
         if (!this.state.frustum.containsPoint(this.position)) {
             this.state.parent.kill();
         }
