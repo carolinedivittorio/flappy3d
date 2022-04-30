@@ -1,7 +1,8 @@
 import { Group } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
-import MODEL from './flower.gltf';
+import MODEL from './bird.gltf';
+import MODELFLAPS from './birdflaps.gltf';
 import * as THREE from 'three';
 
 
@@ -17,15 +18,36 @@ class Bird extends Group {
             tweenCount: 0,
             frustum: parent.state.frustum,
             parent: parent,
-            upFlap: 0,
+            untilFlap: 0,
+            isVisible: 0,
             stopped: false
         };
 
-        const geometry = new THREE.SphereGeometry(0.1, 32, 16);
-        const material = new THREE.MeshPhongMaterial({color:0xAA4A44, specular: 0xCCCCCC, shininess: 5});
-        const sphere = new THREE.Mesh(geometry, material);
-        sphere.castShadow = true;
-        this.add(sphere);
+        const loader = new GLTFLoader();
+        loader.load(
+            MODEL,
+            (gltf) => {
+                var model = gltf.scene;
+                model.scale.set(0.08, 0.08, 0.08);
+                model.rotation.y = Math.PI;
+                model.rotation.z = Math.PI;
+                model.rotation.y += Math.PI / 2;
+                model.visible = true;
+                this.add(model);
+            }
+        );
+        loader.load(
+            MODELFLAPS,
+            (gltf) => {
+                var model = gltf.scene;
+                model.scale.set(0.08, 0.08, 0.08);
+                model.rotation.y = Math.PI;
+                model.rotation.z = Math.PI;
+                model.rotation.y += Math.PI / 2;
+                model.visible = false;
+                this.add(model);
+            }
+        );
 
         // Add self to parent's update list
         parent.addToUpdateList(this);
@@ -53,9 +75,26 @@ class Bird extends Group {
             return;
         }
         TWEEN.update();
+
+        if (this.state.untilFlap > 20) {
+            this.state.untilFlap = 0;
+            this.children[1 - this.state.isVisible].visible = true;
+            this.children[this.state.isVisible].visible = false;
+            this.state.isVisible = 1 - this.state.isVisible;
+        }
+        this.state.untilFlap++;
+      //  console.log(this.position);
         if (!this.state.frustum.containsPoint(this.position)) {
             this.state.parent.kill();
         }
+    }
+
+    pause() {
+        TWEEN.removeAll();
+    }
+
+    resume() {
+      //  TWEEN.start();
     }
 
     stop() {

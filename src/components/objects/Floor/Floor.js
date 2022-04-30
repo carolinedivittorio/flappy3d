@@ -38,16 +38,25 @@ class Floor extends Group {
     }
 
     update(timeStamp, stepSize) {
-        var birdBox = new THREE.Sphere();
+    //    var birdBox = new THREE.Sphere();
         var bird = this.state.parent.children[0];
-        birdBox.radius = bird.children[0].geometry.boundingSphere.radius;
-        birdBox.center = bird.position;
+        // birdBox.radius = bird.children[0].geometry.boundingSphere.radius;
+        // birdBox.center = bird.position;
+        var birdBox = new THREE.Box3().setFromObject(bird);
         var floorBox = new THREE.Box3().setFromObject(this.children[0]);
         var bankBox = new THREE.Box3().setFromObject(this.children[1]);
         if (birdBox.intersectsBox(floorBox) || birdBox.intersectsBox(bankBox)) {
             bird.stop();
             this.parent.kill();
         }
+    }
+
+    pause() {
+
+    }
+
+    resume() {
+
     }
 }
 

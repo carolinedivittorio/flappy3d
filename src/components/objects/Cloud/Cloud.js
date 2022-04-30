@@ -44,14 +44,23 @@ class Cloud extends Group {
         var step = 0.013;
         if (this.state.parent.state.gameState !== "active") {
             step = 0.003;
+            this.state.cloudTime += .01 / .013
         }
-        if (this.state.cloudTime === 0) {
+        if (this.state.cloudTime <= 0) {
             this.addCloud();
             this.state.cloudTime = 2000;
         }
         this.state.cloudTime--;
         this.position.x -= step;
         this.state.x += step;
+    }
+
+    pause() {
+        
+    }
+
+    resume() {
+
     }
 }
 

@@ -21,6 +21,7 @@ class SeedScene extends Scene {
             frustum: frustum,
             floorHeight: -2,
             ceilingHeight: 5,
+            pause: false
         };
 
         // Set background to a nice color
@@ -57,9 +58,31 @@ class SeedScene extends Scene {
         this.state.updateList.push(object);
     }
 
+    pause() {
+        if (this.state.pause) {
+            return;
+        }
+        this.state.pause = true;
+        for (const obj of this.state.updateList) {
+            obj.pause();
+        }
+    }
+
+    resume() {
+        if (!this.state.pause) {
+            return;
+        }
+        this.state.pause = false;
+        for (const obj of this.state.updateList) {
+            obj.resume();
+        }
+    }
+
     update(timeStamp) {
             // Call update for each object in the updateList
-
+        if (this.state.pause) {
+            return;
+        }
         if (this.state.steps > 2) {
             const newPipe = new Pipe(this);
             this.add(newPipe);
@@ -75,7 +98,7 @@ class SeedScene extends Scene {
             obj.update(timeStamp, step);
         }
 
-        this.state.document.getElementById('scoreText').innerHTML = 'Score: ' + this.state.score;
+        this.state.document.getElementById('scoreText').innerHTML = this.state.score;
     }
     press() {
         if (this.state.gameState !== "dead"){

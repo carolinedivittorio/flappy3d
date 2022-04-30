@@ -77,9 +77,9 @@ class Pipe extends Group {
         if (this.state.parent.state.gameState !== "active") {
             return;
         }
-        var birdBox = new THREE.Sphere();
-        birdBox.radius = this.state.bird.children[0].geometry.boundingSphere.radius;
-        birdBox.center = this.state.bird.position;
+        var birdBox = new THREE.Box3().setFromObject(this.state.bird.children[0]);//new THREE.Sphere();
+        //birdBox.radius = this.state.bird.children[0].geometry.boundingSphere.radius;
+      //  birdBox.center = this.state.bird.position;
         var box;
         for (var i = 0; i < this.children.length; i++) {
             this.children[i].position.set(
@@ -92,7 +92,7 @@ class Pipe extends Group {
                 this.parent.kill();
             }
         }
-        if (box.max.x < birdBox.center.x - birdBox.radius) {
+        if (box.max.x < birdBox.min.x) {
             if (!this.state.scored) {
                 this.state.parent.state.score++;
                 console.log(this.state.parent.state.score);
@@ -100,6 +100,14 @@ class Pipe extends Group {
                 this.state.scored = true;
             }
         }
+    }
+
+    pause() {
+
+    }
+
+    resume() {
+
     }
 }
 

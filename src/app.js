@@ -11,6 +11,22 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SeedScene } from 'scenes';
 import * as THREE from 'three';
 
+var head  = document.getElementsByTagName('head')[0];
+var link  = document.createElement('link');
+link.rel  = 'preconnect';
+link.href = 'https://fonts.googleapis.com';
+head.appendChild(link);
+
+link = document.createElement('link');
+link.rel = 'preconnect';
+link.href = "https://fonts.gstatic.com";
+head.appendChild(link);
+
+link = document.createElement('link');
+link.rel = "stylesheet";
+link.href = "https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap";
+head.appendChild(link);
+
 // Initialize core ThreeJS components
 const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
@@ -39,14 +55,38 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
+let pausedContainer = document.createElement('div');
+pausedContainer.id = 'paused';
+document.body.appendChild(pausedContainer);
+
+var paused = false;
+let pausedContent = document.createElement('div');
+pausedContent.id = 'paused-content';
+pausedContainer.appendChild(pausedContent);
+
+let pausedContentText = document.createElement('div');
+pausedContentText.id = 'paused-text';
+pausedContent.appendChild(pausedContentText);
+
+let pausedContentTitleText = document.createElement('h1');
+pausedContentTitleText.innerText = 'PAUSED';
+pausedContentText.appendChild(pausedContentTitleText);
+
+let pausedContentDescription = document.createElement('p');
+pausedContentDescription.innerHTML = 'Press the p key to unpause!';
+pausedContentText.appendChild(pausedContentDescription);
+
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
 scoreText.style.width = 100;
 scoreText.style.height = 100;
-scoreText.innerHTML = 'Score: 0';
-scoreText.style.top = 0.09 * window.innerHeight + 'px';
-scoreText.style.left = 0.86 * window.innerWidth + 'px';
+scoreText.innerHTML = '0';
 scoreText.id = "scoreText";
+scoreText.style.fontFamily = 'Montserrat';
+scoreText.style.fontSize = "xxx-large";
+scoreText.style.color = "white";
+scoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+ 
 document.body.appendChild(scoreText);
 
 var bestScoreText = document.createElement('div');
@@ -55,9 +95,11 @@ bestScoreText.style.width = 100;
 bestScoreText.style.height = 100;
 var bestScore = document.cookie === "" ? 0 : parseInt(document.cookie.split("=")[1]);
 bestScoreText.innerHTML = 'Best: ' + bestScore;
-bestScoreText.style.top = 0.13 * window.innerHeight + 'px';
-bestScoreText.style.left = 0.86 * window.innerWidth + 'px';
 bestScoreText.id = "bestScoreText";
+bestScoreText.style.fontFamily = 'Montserrat';
+bestScoreText.style.fontSize = "xxx-large";
+bestScoreText.style.color = "white";
+bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
 document.body.appendChild(bestScoreText);
 
 
@@ -69,6 +111,13 @@ controls.enablePan = false;
 controls.minDistance = 4;
 controls.maxDistance = 16;
 controls.update();
+
+// Pause the scene
+function pause() {
+    paused = true;
+    scene.state.pause = true;
+    return true;
+}
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
@@ -86,21 +135,36 @@ const windowResizeHandler = () => {
     renderer.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
-    scoreText.style.top = 0.09 * window.innerHeight + 'px';
-    scoreText.style.left = 0.86 * window.innerWidth + 'px';
+
+    var scoreLeftPixels = 0.01 * window.innerWidth;
+    var scoreTopPixels = 0.05 * window.innerHeight;
+    scoreText.style.top = scoreTopPixels + 'px';
+    scoreText.style.right = scoreLeftPixels + "px";
+    bestScoreText.style.top = scoreTopPixels + 50 + 'px';
+    bestScoreText.style.right = scoreLeftPixels + "px";
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
 
 document.body.onkeyup = function(e) {
-    if (e.key == ' ') {
+    if (e.key == ' ' && !scene.state.pause) {
         scene.press();
     } else if (e.key == 'x') {
         if (scene.isDead()) {
             scene.restart();
-            document.getElementById('scoreText').innerHTML = 'Score: 0';
+            document.getElementById('scoreText').innerHTML = '0';
 
         }
+    } else if (e.key == 'p') {
+        if (!paused) {
+            pausedContainer.style.display = 'flex';
+            console.log("PAUSE");
+        } else {
+            pausedContainer.style.display = 'none';
+            console.log("UNPAUSE");
+        }
+        paused = !paused;
+        scene.state.pause = !scene.state.pause;
     }
 
 
