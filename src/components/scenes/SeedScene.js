@@ -2,7 +2,9 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
-import { Flower, Icicle } from '../objects';
+import { Flower, Icicle, Leaves } from '../objects';
+import { Tree } from '../objects/Tree';
+import { Shells } from '../objects/Shells';
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -22,31 +24,59 @@ class SeedScene extends Scene {
             frustum: frustum,
             floorHeight: -2,
             ceilingHeight: 5,
-            pause: false
+            pause: false,
+            season: 0,
+            seasons_list: ["fall", "winter", "spring", "summer"]
         };
 
         // Set background to a nice color
         this.background = new Color(0x7ec0ee);
+        // Pick a season
+        this.state.season = Math.floor(Math.random() * 4);
 
-        // Add meshes to scene
-        // const pipe = new Pipe(this);
+
+        // Add essential meshes to screen - bird, floor and cloud
         const bird = new Bird(this);
-      //  const pipe = new Pipe(this);
         const floor = new Floor(this);
-        // const lights = new BasicLights();
+        const cloud = new Cloud(this);
         this.add(bird);
         this.add(floor);
-        for (let i = 0; i < 10; i++) {
-            var newFlower = new Flower(this);
-            this.add(newFlower);
-        }
-
-        const cloud = new Cloud(this);
         this.add(cloud);
 
-        // var ambLight = new THREE.AmbientLight(0xffffff);
-        // this.add(ambLight);
+
+        console.log(this.state.seasons_list[this.state.season]);
+        // Add seasonal meshes to screen
+        if (this.state.seasons_list[this.state.season] == "fall") {
+            const tree = new Tree(this);
+            this.add(tree);
     
+            for (let i = 0; i < 5; i++) {
+                var newLeaf = new Leaves(this);
+                this.add(newLeaf);
+            }
+        }
+        
+        else if (this.state.seasons_list[this.state.season] == "spring") {
+            for (let i = 0; i < 10; i++) {
+                var newFlower = new Flower(this);
+                this.add(newFlower);
+            }
+        } 
+
+        else if (this.state.seasons_list[this.state.season] == "summer") {
+            for (let i = 0; i < 10; i++) {
+                var newShell = new Shells(this);
+                this.add(newShell);
+            }
+
+        }
+
+        else if (this.state.seasons_list[this.state.season] == "spring") {
+
+        }
+  
+    
+        // Add lights to the scene
         var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                           0.7);
         directionalLight.position.set( 0, 
@@ -63,8 +93,7 @@ class SeedScene extends Scene {
         directionalLight2.castShadow = false;
         this.add(directionalLight2);
 
-        // Populate GUI
-        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
+        
     }
 
     addToUpdateList(object) {
@@ -97,13 +126,36 @@ class SeedScene extends Scene {
             return;
         }
         if (this.state.steps > 2) {
-            //const newPipe = new Pipe(this);
-            const newPipe = new Icicle(this);
+            const newPipe = new Pipe(this);
+            // const newPipe = new Icicle(this);
             this.add(newPipe);
-            for (let i = 0; i < 10; i++) {
-                var newFlower = new Flower(this);
-                this.add(newFlower);
+
+            if (this.state.seasons_list[this.state.season] === "spring") {
+                for (let i = 0; i < 10; i++) {
+                    var newFlower = new Flower(this);
+                    this.add(newFlower);
+                }
             }
+
+            else if (this.state.seasons_list[this.state.season] === "fall") {
+                var prob = Math.random();
+                if (prob < 0.3) {
+                    var newTree = new Tree(this);
+                    for (let i = 0; i < 5; i++) {
+                        var newLeaf = new Leaves(this);
+                        this.add(newLeaf);
+                    }
+                    this.add(newTree);
+                }
+            }
+
+            else if (this.state.seasons_list[this.state.season] === "summer") {
+                for (let i = 0; i < 10; i++) {
+                    var newShell = new Shells(this);
+                    this.add(newShell);
+                }
+            }
+            
             
             this.state.steps = 0;
         }
@@ -142,17 +194,44 @@ class SeedScene extends Scene {
             for (var i = 0; i < children.length; i++) {
                 this.remove(children[i]);
             }
+            this.state.season = (this.state.season + 1) % 4;
             const bird = new Bird(this);
-            //  const pipe = new Pipe(this);
             const floor = new Floor(this);
-            //   const lights = new BasicLights();
+            const cloud = new Cloud(this);
             this.add(bird);
             this.add(floor);
-            const cloud = new Cloud(this);
             this.add(cloud);
       
-            //   var ambLight = new THREE.AmbientLight(0xffffff);
-            //   this.add(ambLight);
+            // pick a season
+            console.log(this.state.seasons_list[this.state.season]);
+            // Add seasonal meshes to screen
+            if (this.state.seasons_list[this.state.season] == "fall") {
+                const tree = new Tree(this);
+                this.add(tree);
+        
+                for (let i = 0; i < 5; i++) {
+                    var newLeaf = new Leaves(this);
+                    this.add(newLeaf);
+                }
+            }
+            
+            else if (this.state.seasons_list[this.state.season] == "spring") {
+                for (let i = 0; i < 10; i++) {
+                    var newFlower = new Flower(this);
+                    this.add(newFlower);
+                }
+            } 
+
+            else if (this.state.seasons_list[this.state.season] == "summer") {
+                for (let i = 0; i < 10; i++) {
+                    var newShell = new Shells(this);
+                    this.add(newShell);
+                }
+            }
+
+            else if (this.state.seasons_list[this.state.season] == "spring") {
+
+            }
           
             var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                                 0.7);

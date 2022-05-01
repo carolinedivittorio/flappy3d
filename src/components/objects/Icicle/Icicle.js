@@ -5,17 +5,20 @@ import MODEL from './scene.gltf';
 
 class Icicle extends Group {
 
-    addIcicle() {
+    addIcicle(x, y, z) {
         console.log('creating new icicle');
         const loader = new GLTFLoader();
         loader.load(
             MODEL,
             (gltf) => {
                 var model = gltf.scene;
-                var newMaterial = new THREE.MeshStandardMaterial({color: 0xA5F2F3 , opacity: 0.5});
-                model.traverse((o) => {
-                if (o.isMesh) o.material = newMaterial;
-                });
+                // var newMaterial = new THREE.MeshStandardMaterial({color: 0xA5F2F3 , opacity: 0.5});
+                // model.traverse((o) => {
+                // if (o.isMesh) o.material = newMaterial;
+                // });
+                model.position.x = x;
+                model.position.y = y;
+                model.position.z = z;
                 this.add(model);
             }
         );
@@ -33,7 +36,9 @@ class Icicle extends Group {
             scored: false
          }
     
-        this.addIcicle();
+        var offset = Math.random() * 2 - 1;
+        this.addIcicle(0, 2, 0);
+
         this.position.x = 0;
         this.position.y = -1;
         this.position.z = 0;

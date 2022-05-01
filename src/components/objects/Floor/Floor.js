@@ -13,8 +13,20 @@ class Floor extends Group {
             parent: parent
          }
 
+
+         console.log('setting my floor');
+         console.log(this.state.parent.state.seasons_list[this.state.parent.state.season]);
+
         const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 4);
-        const floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+        var floorMaterial;
+        if (this.state.parent.state.seasons_list[this.state.parent.state.season] == "summer") {
+             floorMaterial = new THREE.MeshStandardMaterial({color: 0xf2d16b});
+        } else if (this.state.parent.state.seasons_list[this.state.parent.state.season] === "winter") {
+            floorMaterial = new THREE.MeshStandardMaterial({color: 0x0ff7fa});
+        } else {
+            floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+        }
+
         const floor = new THREE.Mesh( floorGeometry, floorMaterial );
         floor.receiveShadow = true;
         floor.position.x = 0;
