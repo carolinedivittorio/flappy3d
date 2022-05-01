@@ -13,14 +13,14 @@ class Floor extends Group {
             parent: parent
          }
 
-        const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 10);
+        const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 4);
         const floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
         const floor = new THREE.Mesh( floorGeometry, floorMaterial );
         floor.receiveShadow = true;
         console.log(floor.position);
         floor.position.x = 0;
         floor.position.y = this.state.height - 0.1;
-        floor.position.z = -4;
+        floor.position.z = 0;
         this.add(floor);
 
         const bankGeometry = new THREE.BoxGeometry(10000, 10000, 0.2);

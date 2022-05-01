@@ -28,7 +28,7 @@ class Pipe extends Group {
         bottomPipe.castShadow = true;
         const bottomPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, this.state.bottomLength / 20, 32);
         const bottomPipeHat = new THREE.Mesh(bottomPipeGeometryHat, pipeMaterial);
-        bottomPipe.castShadow = true;
+        bottomPipeHat.castShadow = true;
 
 
         // bottomPipe.scale.set(parent.state.height * 0.05, this.state.bottomLength, 1);

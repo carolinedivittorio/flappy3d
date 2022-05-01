@@ -45,8 +45,8 @@ class SeedScene extends Scene {
         var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                           0.7);
         directionalLight.position.set( 0, 
-                                       2, 
-                                       4); 
+                                       10, 
+                                       10); 
         directionalLight.castShadow = true;
         this.add(directionalLight);
 
@@ -145,7 +145,7 @@ class SeedScene extends Scene {
           
             var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                                 0.7);
-            directionalLight.position.set( 0, 
+            directionalLight.position.set( 2, 
                                              2, 
                                              4); 
             directionalLight.castShadow = true;

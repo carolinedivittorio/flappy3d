@@ -3,9 +3,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
 import MODEL from './bird.gltf';
 import MODELFLAPS from './birdflaps.gltf';
-import * as THREE from 'three';
-
-
 
 class Bird extends Group {
     constructor(parent) {
@@ -33,6 +30,7 @@ class Bird extends Group {
                 model.rotation.z = Math.PI;
                 model.rotation.y += Math.PI / 2;
                 model.visible = true;
+                model.castShadow = true;
                 this.add(model);
             }
         );
@@ -45,10 +43,13 @@ class Bird extends Group {
                 model.rotation.z = Math.PI;
                 model.rotation.y += Math.PI / 2;
                 model.visible = false;
+                model.castShadow = true;
                 this.add(model);
             }
         );
 
+        this.castShadow = true;
+        this.receiveShadow = true;
         // Add self to parent's update list
         parent.addToUpdateList(this);
 

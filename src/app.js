@@ -76,13 +76,53 @@ document.body.appendChild(canvas);
 // pausedContentDescription.innerHTML = 'Press the p key to unpause!';
 // pausedContentText.appendChild(pausedContentDescription);
 
+var welcomeDiv = document.createElement('div');
 var welcomeText = document.createElement('div');
-welcomeText.style.width = 200;
-welcomeText.style.height = 200;
-welcomeText.innerHTML = "Welcome to Flappy Bird!";
-welcomeText.style.backgroundColor = "white";
-document.body.appendChild(welcomeText);
+welcomeText.style.position = 'absolute';
+welcomeText.style.width = 100;
+welcomeText.style.height = 100;
+welcomeText.innerHTML = 'Welcome to Flappy Bird!';
+welcomeText.id = "welcomeText";
+welcomeText.style.fontFamily = 'Montserrat';
+welcomeText.style.fontSize = "xxx-large";
+welcomeText.style.color = "white";
+welcomeText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+welcomeText.style.top = "5%";
+welcomeText.style.left = "1%"
+document.body.appendChild(welcomeDiv);
+welcomeDiv.appendChild(welcomeText);
+var spaceText = document.createElement('div');
+spaceText.style.position = 'absolute';
+spaceText.style.width = 100;
+spaceText.style.height = 100;
+spaceText.innerHTML = 'Press the space bar to jump.';
+spaceText.id = "spaceText";
+spaceText.style.fontFamily = 'Montserrat';
+spaceText.style.fontSize = "xx-large";
+spaceText.style.color = "white";
+spaceText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+spaceText.style.top = 0.05 * window.innerHeight + 75 + 'px';
+spaceText.style.left = "1%";
+welcomeDiv.appendChild(spaceText);
+welcomeDiv.style.opacity = 2;
 
+
+function fadeOutEffect() {
+    var fadeTarget = welcomeDiv;
+    
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 200);
+}
+
+var parentDiv = document.createElement('div');
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
 scoreText.style.width = 100;
@@ -94,7 +134,8 @@ scoreText.style.fontSize = "xxx-large";
 scoreText.style.color = "white";
 scoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
  
-document.body.appendChild(scoreText);
+document.body.appendChild(parentDiv);
+parentDiv.appendChild(scoreText);
 
 var bestScoreText = document.createElement('div');
 bestScoreText.style.position = 'absolute';
@@ -107,7 +148,7 @@ bestScoreText.style.fontFamily = 'Montserrat';
 bestScoreText.style.fontSize = "xxx-large";
 bestScoreText.style.color = "white";
 bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
-document.body.appendChild(bestScoreText);
+parentDiv.appendChild(bestScoreText);
 
 
 
@@ -132,6 +173,10 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
+    console.log(scene.state.gameState);
+    if (scene.state.gameState !== "waiting" && welcomeDiv.style.opacity > 0) {
+        welcomeDiv.style.opacity -= 0.003;
+    }
  
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
@@ -155,6 +200,9 @@ window.addEventListener('resize', windowResizeHandler, false);
 
 document.body.onkeyup = function(e) {
     if (e.key == ' ' && !scene.state.pause) {
+        if (scene.state === "waiting") {
+            fadeOutEffect();
+        }
         scene.press();
     } else if (e.key == 'x') {
         if (scene.isDead()) {
