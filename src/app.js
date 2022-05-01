@@ -77,11 +77,32 @@ document.body.appendChild(canvas);
 // pausedContentText.appendChild(pausedContentDescription);
 
 var welcomeText = document.createElement('div');
+welcomeText.style.position = "absolute"
 welcomeText.style.width = 200;
 welcomeText.style.height = 200;
-welcomeText.innerHTML = "Welcome to Flappy Bird!";
-welcomeText.style.backgroundColor = "white";
+welcomeText.innerHTML = "<h1>Welcome to Flappy Bird!<h1><h3>Press the space bar to start.<h3><h3>Press 'p' to pause.<h3><br>";
+welcomeText.style.color = "white";
+welcomeText.style.backgroundColor = "black";
+welcomeText.style.padding = "1%";
+welcomeText.style.opacity = 0.3;
+welcomeText.style.borderRadius = 1;
+welcomeText.id = "welcomeText";
 document.body.appendChild(welcomeText);
+
+var deadText = document.createElement('div');
+deadText.style.position = "absolute"
+deadText.style.width = 200;
+deadText.style.height = 200;
+deadText.innerHTML = "<h1>Game Over!<h1><h3>Press 'x' to start over.<h3><br>";
+deadText.style.color = "white";
+deadText.style.backgroundColor = "black";
+deadText.style.padding = "1%";
+deadText.style.opacity = 0.3;
+deadText.style.borderRadius = 1;
+deadText.id = "deadText";
+document.body.appendChild(deadText);
+deadText.hidden = true;
+document.body.appendChild(deadText);
 
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
@@ -149,13 +170,18 @@ const windowResizeHandler = () => {
     scoreText.style.right = scoreLeftPixels + "px";
     bestScoreText.style.top = scoreTopPixels + 50 + 'px';
     bestScoreText.style.right = scoreLeftPixels + "px";
+    welcomeText.style.top = scoreTopPixels + 'px';
+    welcomeText.style.left = 0.03 * window.innerWidth + welcomeText.style.width + "px";
+    deadText.style.top = scoreTopPixels + "px";
+    deadText.style.left = 0.03 * window.innerWidth + deadText.style.width + "px";
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
 
-document.body.onkeyup = function(e) {
+document.body.onkeydown = function(e) {
     if (e.key == ' ' && !scene.state.pause) {
         scene.press();
+        welcomeText.hidden = true;
     } else if (e.key == 'x') {
         if (scene.isDead()) {
             scene.restart();
