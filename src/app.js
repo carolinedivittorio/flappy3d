@@ -103,11 +103,6 @@ bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 
 document.body.appendChild(bestScoreText);
 
 
-var welcomeBoard = document.createElement('div');
-welcomeBoard.style.backgroundColor = "black";
-document.body.appendChild(welcomeBoard);
-
-
 
 // Set up controls
 const controls = new OrbitControls(camera, canvas);
