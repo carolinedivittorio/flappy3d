@@ -8,3 +8,4 @@ export * from './Tree';
 export * from './Leaves';
 export * from './Ocean';
 export * from './Boat';
+export * from './Flake';

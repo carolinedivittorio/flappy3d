@@ -2,7 +2,7 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud, Snowman } from 'objects';
 import { BasicLights } from 'lights';
-import { Boat, Flower, Icicle, Leaves, Ocean } from '../objects';
+import { Boat, Flake, Flower, Icicle, Leaves, Ocean } from '../objects';
 
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
@@ -84,6 +84,11 @@ class SeedScene extends Scene {
         else if (this.state.seasons_list[this.state.season] == "winter") {
             const snowman = new Snowman(this);
             this.add(snowman);
+
+            for (var i = 0; i < 100; i++) {
+                var newFlake = new Flake(this);
+                this.add(newFlake);
+            }
         }
   
     
@@ -176,6 +181,12 @@ class SeedScene extends Scene {
                     this.add(newBoat);
                 }
             }
+            else if (this.state.seasons_list[this.state.season] === "winter") {
+                for (var i = 0; i < 100; i++) {
+                    var newFlake = new Flake(this);
+                    this.add(newFlake);
+                }
+            }
             
             
             this.state.steps = 0;
@@ -224,7 +235,6 @@ class SeedScene extends Scene {
             this.add(cloud);
       
             // pick a season
-            console.log(this.state.seasons_list[this.state.season]);
             // Add seasonal meshes to screen
             if (this.state.seasons_list[this.state.season] == "fall") {
                 const tree = new Tree(this);
@@ -248,12 +258,29 @@ class SeedScene extends Scene {
                     var newShell = new Shells(this);
                     this.add(newShell);
                 }
+                var newOcean = new Ocean(this);
+                this.add(newOcean);
+
+                var newBoat = new Boat(this);
+                this.add(newBoat);
+
+                var newBall = new Ball(this);
+                this.add(newBall);
+
             }
 
-            else if (this.state.seasons_list[this.state.season] == "spring") {
+            else if (this.state.seasons_list[this.state.season] == "winter") {
+                const snowman = new Snowman(this);
+                this.add(snowman);
 
+                for (var i = 0; i < 100; i++) {
+                    var newFlake = new Flake(this);
+                    this.add(newFlake);
+                }
             }
-          
+    
+
+            
             var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                                 0.7);
             directionalLight.position.set( 2, 

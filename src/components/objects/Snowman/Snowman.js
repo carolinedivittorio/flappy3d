@@ -31,7 +31,7 @@ class Snowman extends Group {
             this.add(gltf.scene);
             this.position.x = 10 + Math.random() * 2;
             this.position.y = -2;
-            this.position.z = 1 - Math.random() * 3;
+            this.position.z = -1 - Math.random() * 3;
         });
         this.scale.set(0.5, 0.5, 0.5)
 
