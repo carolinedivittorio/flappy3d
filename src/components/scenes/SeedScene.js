@@ -2,6 +2,7 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
+import { Flower, Icicle } from '../objects';
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -35,6 +36,10 @@ class SeedScene extends Scene {
         // const lights = new BasicLights();
         this.add(bird);
         this.add(floor);
+        for (let i = 0; i < 100; i++) {
+            var newFlower = new Flower(this);
+            this.add(newFlower);
+        }
 
         const cloud = new Cloud(this);
         this.add(cloud);
@@ -93,7 +98,13 @@ class SeedScene extends Scene {
         }
         if (this.state.steps > 2) {
             const newPipe = new Pipe(this);
+            // const newPipe = new Icicle(this);
             this.add(newPipe);
+            for (let i = 0; i < 100; i++) {
+                var newFlower = new Flower(this);
+                this.add(newFlower);
+            }
+            
             this.state.steps = 0;
         }
 

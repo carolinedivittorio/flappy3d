@@ -69,7 +69,7 @@
   "buffers": [
     {
       "byteLength": 1597296,
-      "uri": "scene.bin"
+      "uri": "src/components/objects/Icicle/scene.bin"
     }
   ],
   "extensionsUsed": [

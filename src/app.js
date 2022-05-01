@@ -78,21 +78,21 @@ document.body.appendChild(canvas);
 
 var welcomeText = document.createElement('div');
 welcomeText.style.position = "absolute"
-welcomeText.style.width = 200;
-welcomeText.style.height = 200;
+// welcomeText.style.width = 200;
+// welcomeText.style.height = 200;
 welcomeText.innerHTML = "<h1>Welcome to Flappy Bird!<h1><h3>Press the space bar to start.<h3><h3>Press 'p' to pause.<h3><br>";
 welcomeText.style.color = "white";
 welcomeText.style.backgroundColor = "black";
 welcomeText.style.padding = "1%";
 welcomeText.style.opacity = 0.3;
-welcomeText.style.borderRadius = 1;
+welcomeText.style.borderRadius = "10px";
 welcomeText.id = "welcomeText";
 document.body.appendChild(welcomeText);
 
 var deadText = document.createElement('div');
 deadText.style.position = "absolute"
-deadText.style.width = 200;
-deadText.style.height = 200;
+// deadText.style.width = 200;
+// deadText.style.height = 200;
 deadText.innerHTML = "<h1>Game Over!<h1><h3>Press 'x' to start over.<h3><br>";
 deadText.style.color = "white";
 deadText.style.backgroundColor = "black";
@@ -100,6 +100,7 @@ deadText.style.padding = "1%";
 deadText.style.opacity = 0.3;
 deadText.style.borderRadius = 1;
 deadText.id = "deadText";
+deadText.style.borderRadius = "10px";
 document.body.appendChild(deadText);
 deadText.hidden = true;
 document.body.appendChild(deadText);
