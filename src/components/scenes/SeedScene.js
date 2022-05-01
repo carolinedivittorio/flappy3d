@@ -2,7 +2,7 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
-import { Flower, Icicle } from '../objects';
+import { Flower, Snowman } from '../objects';
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -21,7 +21,7 @@ class SeedScene extends Scene {
             steps: 0,
             frustum: frustum,
             floorHeight: -2,
-            ceilingHeight: 5,
+            ceilingHeight: 3,
             pause: false
         };
 

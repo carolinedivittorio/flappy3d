@@ -97,6 +97,7 @@ class Bird extends Group {
         this.state.untilFlap++;
 
         if (!this.state.frustum.containsPoint(this.position)) {
+            console.log(this.position);
             this.state.parent.kill();
         }
     }
