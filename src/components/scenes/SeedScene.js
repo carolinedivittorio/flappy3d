@@ -1,11 +1,12 @@
 import { Scene, Color } from 'three';
 import * as THREE from 'three';
-import { Bird, Pipe, Floor, Cloud } from 'objects';
+import { Bird, Pipe, Floor, Cloud, Snowman } from 'objects';
 import { BasicLights } from 'lights';
-import { Flower, Icicle, Leaves, Ocean } from '../objects';
+import { Boat, Flower, Icicle, Leaves, Ocean } from '../objects';
 
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
+import { Ball } from '../objects/Ball';
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -72,10 +73,17 @@ class SeedScene extends Scene {
             var newOcean = new Ocean(this);
             this.add(newOcean);
 
+            var newBoat = new Boat(this);
+            this.add(newBoat);
+
+            var newBall = new Ball(this);
+            this.add(newBall);
+
         }
 
-        else if (this.state.seasons_list[this.state.season] == "spring") {
-
+        else if (this.state.seasons_list[this.state.season] == "winter") {
+            const snowman = new Snowman(this);
+            this.add(snowman);
         }
   
     
@@ -156,6 +164,16 @@ class SeedScene extends Scene {
                 for (let i = 0; i < 10; i++) {
                     var newShell = new Shells(this);
                     this.add(newShell);
+                }
+                var prob = Math.random();
+                if (prob < 0.2) {
+                    var newBall = new Ball(this);
+                    this.add(newBall);
+                }
+                var prob = Math.random();
+                if (prob < 0.1) {
+                    var newBoat = new Boat(this);
+                    this.add(newBoat);
                 }
             }
             

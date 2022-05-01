@@ -91,7 +91,7 @@
   "buffers": [
     {
       "byteLength": 137624,
-      "uri": "src/components/object/Ocean/scene.bin"
+      "uri": "src/components/objects/Ocean/scene.bin"
     }
   ],
   "materials": [

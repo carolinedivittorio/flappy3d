@@ -2,8 +2,10 @@ import { Group, Mesh } from 'three';
 import * as THREE from 'three';
 import MODEL from './scene.gltf';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-class Ocean extends Group {
-    addOcean() {
+
+
+class Ball extends Group {
+    addBall() {
         const loader = new GLTFLoader();
         loader.load(
             MODEL,
@@ -29,11 +31,11 @@ class Ocean extends Group {
             parent: parent
         };
 
-        this.addOcean();
+        this.addBall();
         console.log(this);
-        this.position.y = -3.5;
-        this.position.z = -52;
-        this.position.x = 0;
+        this.position.y = -1.85;
+        this.position.z = -1 + Math.random() * 2;
+        this.position.x = 5;
         this.castShadow = false;
         parent.addToUpdateList(this);
 
@@ -52,4 +54,4 @@ class Ocean extends Group {
     }
 }
 
-export default Ocean;
+export default Ball;
