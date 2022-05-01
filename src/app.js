@@ -107,20 +107,35 @@ welcomeDiv.appendChild(spaceText);
 welcomeDiv.style.opacity = 2;
 
 
-function fadeOutEffect() {
-    var fadeTarget = welcomeDiv;
-    
-    var fadeEffect = setInterval(function () {
-        if (!fadeTarget.style.opacity) {
-            fadeTarget.style.opacity = 1;
-        }
-        if (fadeTarget.style.opacity > 0) {
-            fadeTarget.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 200);
-}
+var deadDiv = document.createElement('div');
+var deadText = document.createElement('div');
+deadText.style.position = 'absolute';
+deadText.style.width = 100;
+deadText.style.height = 100;
+deadText.innerHTML = 'Game over!';
+deadText.id = "welcomeText";
+deadText.style.fontFamily = 'Montserrat';
+deadText.style.fontSize = "xxx-large";
+deadText.style.color = "white";
+deadText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+deadText.style.top = "5%";
+deadText.style.left = "1%"
+document.body.appendChild(deadDiv);
+deadDiv.appendChild(deadText);
+var xText = document.createElement('div');
+xText.style.position = 'absolute';
+xText.style.width = 100;
+xText.style.height = 100;
+xText.innerHTML = 'Press x to start again.';
+xText.id = "spaceText";
+xText.style.fontFamily = 'Montserrat';
+xText.style.fontSize = "xx-large";
+xText.style.color = "white";
+xText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+xText.style.top = 0.05 * window.innerHeight + 75 + 'px';
+xText.style.left = "1%";
+deadDiv.appendChild(xText);
+deadDiv.hidden = true;
 
 var parentDiv = document.createElement('div');
 var scoreText = document.createElement('div');
@@ -174,8 +189,19 @@ const onAnimationFrameHandler = (timeStamp) => {
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
     console.log(scene.state.gameState);
-    if (scene.state.gameState !== "waiting" && welcomeDiv.style.opacity > 0) {
+    if (scene.state.gameState === "waiting") {
+        welcomeDiv.hidden = false;
+        deadDiv.hidden = true;
+    }
+    if (scene.state.gameState === "active" && welcomeDiv.style.opacity > 0) {
+        welcomeDiv.hidden = false;
+        deadDiv.hidden = true;
         welcomeDiv.style.opacity -= 0.003;
+    }
+    if (scene.state.gameState === "dead") {
+        deadDiv.hidden = false;
+        welcomeDiv.style.opacity = 2;
+        welcomeDiv.hidden = true;
     }
  
 };
@@ -198,7 +224,7 @@ const windowResizeHandler = () => {
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
 
-document.body.onkeyup = function(e) {
+document.body.onkeydown = function(e) {
     if (e.key == ' ' && !scene.state.pause) {
         if (scene.state === "waiting") {
             fadeOutEffect();

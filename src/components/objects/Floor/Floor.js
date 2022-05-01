@@ -17,7 +17,6 @@ class Floor extends Group {
         const floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
         const floor = new THREE.Mesh( floorGeometry, floorMaterial );
         floor.receiveShadow = true;
-        console.log(floor.position);
         floor.position.x = 0;
         floor.position.y = this.state.height - 0.1;
         floor.position.z = 0;
