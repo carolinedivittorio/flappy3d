@@ -50,6 +50,14 @@ class SeedScene extends Scene {
         directionalLight.castShadow = true;
         this.add(directionalLight);
 
+        var directionalLight2 = new THREE.DirectionalLight(0xffffff,
+            0.7)
+        directionalLight2.position.set( 10, 
+                    5, 
+                    4); 
+        directionalLight2.castShadow = false;
+        this.add(directionalLight2);
+
         // Populate GUI
         // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
     }
@@ -142,6 +150,14 @@ class SeedScene extends Scene {
                                              4); 
             directionalLight.castShadow = true;
             this.add(directionalLight);
+
+            var directionalLight2 = new THREE.DirectionalLight(0xffffff,
+                            0.7);
+            directionalLight2.position.set( 10, 
+                                            5, 
+                                            4); 
+            directionalLight2.castShadow = false;
+            this.add(directionalLight2);
         }
     }
 

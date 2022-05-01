@@ -166,6 +166,17 @@ document.body.onkeyup = function(e) {
         paused = !paused;
         scene.state.pause = !scene.state.pause;
     }
-
-
 }
+
+
+var welcomeBoard = document.createElement('div');
+welcomeBoard.style.position = 'absolute';
+welcomeBoard.style.width = 100;
+welcomeBoarc.style.height = 100;
+welcomeBoard.innerHTML = 'Welcome to Flappy Bird';
+bestScoreText.id = "bestScoreText";
+bestScoreText.style.fontFamily = 'Montserrat';
+bestScoreText.style.fontSize = "xxx-large";
+bestScoreText.style.color = "white";
+bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+document.body.appendChild(bestScoreText);
