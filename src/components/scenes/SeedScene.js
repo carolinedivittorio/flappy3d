@@ -97,8 +97,8 @@ class SeedScene extends Scene {
             return;
         }
         if (this.state.steps > 2) {
-            const newPipe = new Pipe(this);
-            // const newPipe = new Icicle(this);
+            //const newPipe = new Pipe(this);
+            const newPipe = new Icicle(this);
             this.add(newPipe);
             for (let i = 0; i < 100; i++) {
                 var newFlower = new Flower(this);

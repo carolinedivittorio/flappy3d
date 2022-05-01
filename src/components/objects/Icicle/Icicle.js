@@ -12,7 +12,7 @@ class Icicle extends Group {
             MODEL,
             (gltf) => {
                 var model = gltf.scene;
-                var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
+                var newMaterial = new THREE.MeshStandardMaterial({color: 0xA5F2F3 , opacity: 0.5});
                 model.traverse((o) => {
                 if (o.isMesh) o.material = newMaterial;
                 });
