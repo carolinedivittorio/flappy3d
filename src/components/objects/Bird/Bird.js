@@ -5,8 +5,6 @@ import MODEL from './bird.gltf';
 import MODELFLAPS from './birdflaps.gltf';
 import * as THREE from 'three';
 
-
-
 class Bird extends Group {
     constructor(parent) {
         // Call parent Group() constructor
@@ -20,7 +18,8 @@ class Bird extends Group {
             parent: parent,
             untilFlap: 0,
             isVisible: 0,
-            stopped: false
+            stopped: false,
+            floorHeight: parent.state.floorHeight
         };
 
         const loader = new GLTFLoader();
@@ -33,6 +32,7 @@ class Bird extends Group {
                 model.rotation.z = Math.PI;
                 model.rotation.y += Math.PI / 2;
                 model.visible = true;
+                model.castShadow = true;
                 this.add(model);
             }
         );
@@ -45,10 +45,13 @@ class Bird extends Group {
                 model.rotation.z = Math.PI;
                 model.rotation.y += Math.PI / 2;
                 model.visible = false;
+                model.castShadow = true;
                 this.add(model);
             }
         );
 
+        this.castShadow = true;
+        this.receiveShadow = true;
         // Add self to parent's update list
         parent.addToUpdateList(this);
 
@@ -65,7 +68,7 @@ class Bird extends Group {
             .to({z : Math.PI * 1/8}, 300)
             .easing(TWEEN.Easing.Quadratic.Out);
         const fallDown = new TWEEN.Tween(this.position)
-            .to({ y: -this.state.height / 100   }, 1100)
+            .to({ y: this.state.floorHeight   }, 700)
             .easing(TWEEN.Easing.Quadratic.In);
         const fallOver = new TWEEN.Tween(this.rotation)
             .to({z: -Math.PI * 1 / 8}, 300)
@@ -81,7 +84,10 @@ class Bird extends Group {
             return;
         }
         TWEEN.update();
-
+        var box = new THREE.Box3().setFromObject(this);
+        if (box.min.y <= this.state.floorHeight) {
+            this.state.parent.kill();
+        }
         if (this.state.untilFlap > 20) {
             this.state.untilFlap = 0;
             this.children[1 - this.state.isVisible].visible = true;

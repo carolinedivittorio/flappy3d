@@ -24,7 +24,7 @@ class Flower extends Group {
             this.add(gltf.scene);
             this.position.x = 10 + Math.random() * 2;
             this.position.y = -2;
-            this.position.z = 0 - Math.random() * 10;
+            this.position.z = 2 - Math.random() * 4;
         });
         // this.position.x = 3;
         // this.position.y = -5;
@@ -39,30 +39,29 @@ class Flower extends Group {
         // this.state.gui.add(this.state, 'spin');
     }
 
-    // spin() {
-    //     // Add a simple twirl
-    //     this.state.twirl += 6 * Math.PI;
+    spin() {
+        // Add a simple twirl
+        this.state.twirl += 6 * Math.PI;
 
-    //     // Use timing library for more precice "bounce" animation
-    //     // TweenJS guide: http://learningthreejs.com/blog/2011/08/17/tweenjs-for-smooth-animation/
-    //     // Possible easings: http://sole.github.io/tween.js/examples/03_graphs.html
-    //     const jumpUp = new TWEEN.Tween(this.position)
-    //         .to({ y: this.position.y + 1 }, 300)
-    //         .easing(TWEEN.Easing.Quadratic.Out);
-    //     const fallDown = new TWEEN.Tween(this.position)
-    //         .to({ y: 0 }, 300)
-    //         .easing(TWEEN.Easing.Quadratic.In);
+        // Use timing library for more precice "bounce" animation
+        // TweenJS guide: http://learningthreejs.com/blog/2011/08/17/tweenjs-for-smooth-animation/
+        // Possible easings: http://sole.github.io/tween.js/examples/03_graphs.html
+        const jumpUp = new TWEEN.Tween(this.position)
+            .to({ y: this.position.y + 1 }, 300)
+            .easing(TWEEN.Easing.Quadratic.Out);
+        const fallDown = new TWEEN.Tween(this.position)
+            .to({ y: 0 }, 300)
+            .easing(TWEEN.Easing.Quadratic.In);
 
-    //     // Fall down after jumping up
-    //     jumpUp.onComplete(() => fallDown.start());
+        // Fall down after jumping up
+        jumpUp.onComplete(() => fallDown.start());
 
-    //     // Start animation
-    //     jumpUp.start();
-    // }
+        // Start animation
+        jumpUp.start();
+    }
 
     update(timeStamp, stepSize) {
         // console.log(this.children);
-        console.log(this.position);
         this.position.x = this.position.x - stepSize;
 
         // this.children[0].position.set(
@@ -81,7 +80,7 @@ class Flower extends Group {
         // }
 
         // // Advance tween animations, if any exist
-        // TWEEN.update();
+         TWEEN.update();
     }
 }
 

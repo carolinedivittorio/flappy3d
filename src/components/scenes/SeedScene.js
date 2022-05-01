@@ -36,7 +36,7 @@ class SeedScene extends Scene {
         // const lights = new BasicLights();
         this.add(bird);
         this.add(floor);
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 10; i++) {
             var newFlower = new Flower(this);
             this.add(newFlower);
         }
@@ -50,8 +50,8 @@ class SeedScene extends Scene {
         var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                           0.7);
         directionalLight.position.set( 0, 
-                                       2, 
-                                       4); 
+                                       10, 
+                                       10); 
         directionalLight.castShadow = true;
         this.add(directionalLight);
 
@@ -100,7 +100,7 @@ class SeedScene extends Scene {
             //const newPipe = new Pipe(this);
             const newPipe = new Icicle(this);
             this.add(newPipe);
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 10; i++) {
                 var newFlower = new Flower(this);
                 this.add(newFlower);
             }
@@ -132,8 +132,6 @@ class SeedScene extends Scene {
 
     restart() {
         if (this.state.gameState === "dead") {
-            this.state.document.getElementById('deadText').hidden = true;
-            this.state.document.getElementById('welcomeText').hidden = false;
             var bestScore = document.cookie==="" ? 0 : document.cookie.split('=')[1];
             this.state.document.getElementById('bestScoreText').innerHTML = 'Best: ' + bestScore;
             this.state.updateList = [];
@@ -158,7 +156,7 @@ class SeedScene extends Scene {
           
             var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                                 0.7);
-            directionalLight.position.set( 0, 
+            directionalLight.position.set( 2, 
                                              2, 
                                              4); 
             directionalLight.castShadow = true;
@@ -180,7 +178,6 @@ class SeedScene extends Scene {
 
     kill() {
         this.state.gameState = "dead";
-        this.state.document.getElementById('deadText').hidden = false;
         if (this.state.document.cookie === "") {
             this.state.document.cookie = "bestScore=0";
         } else {

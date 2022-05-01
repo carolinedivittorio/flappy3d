@@ -76,35 +76,68 @@ document.body.appendChild(canvas);
 // pausedContentDescription.innerHTML = 'Press the p key to unpause!';
 // pausedContentText.appendChild(pausedContentDescription);
 
+var welcomeDiv = document.createElement('div');
 var welcomeText = document.createElement('div');
-welcomeText.style.position = "absolute"
-// welcomeText.style.width = 200;
-// welcomeText.style.height = 200;
-welcomeText.innerHTML = "<h1>Welcome to Flappy Bird!<h1><h3>Press the space bar to start.<h3><h3>Press 'p' to pause.<h3><br>";
-welcomeText.style.color = "white";
-welcomeText.style.backgroundColor = "black";
-welcomeText.style.padding = "1%";
-welcomeText.style.opacity = 0.3;
-welcomeText.style.borderRadius = "10px";
+welcomeText.style.position = 'absolute';
+welcomeText.style.width = 100;
+welcomeText.style.height = 100;
+welcomeText.innerHTML = 'Welcome to Flappy Bird!';
 welcomeText.id = "welcomeText";
-document.body.appendChild(welcomeText);
+welcomeText.style.fontFamily = 'Montserrat';
+welcomeText.style.fontSize = "xxx-large";
+welcomeText.style.color = "white";
+welcomeText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+welcomeText.style.top = "5%";
+welcomeText.style.left = "1%"
+document.body.appendChild(welcomeDiv);
+welcomeDiv.appendChild(welcomeText);
+var spaceText = document.createElement('div');
+spaceText.style.position = 'absolute';
+spaceText.style.width = 100;
+spaceText.style.height = 100;
+spaceText.innerHTML = 'Press the space bar to jump.';
+spaceText.id = "spaceText";
+spaceText.style.fontFamily = 'Montserrat';
+spaceText.style.fontSize = "xx-large";
+spaceText.style.color = "white";
+spaceText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+spaceText.style.top = 0.05 * window.innerHeight + 75 + 'px';
+spaceText.style.left = "1%";
+welcomeDiv.appendChild(spaceText);
+welcomeDiv.style.opacity = 2;
 
+
+var deadDiv = document.createElement('div');
 var deadText = document.createElement('div');
-deadText.style.position = "absolute"
-// deadText.style.width = 200;
-// deadText.style.height = 200;
-deadText.innerHTML = "<h1>Game Over!<h1><h3>Press 'x' to start over.<h3><br>";
+deadText.style.position = 'absolute';
+deadText.style.width = 100;
+deadText.style.height = 100;
+deadText.innerHTML = 'Game over!';
+deadText.id = "welcomeText";
+deadText.style.fontFamily = 'Montserrat';
+deadText.style.fontSize = "xxx-large";
 deadText.style.color = "white";
-deadText.style.backgroundColor = "black";
-deadText.style.padding = "1%";
-deadText.style.opacity = 0.3;
-deadText.style.borderRadius = 1;
-deadText.id = "deadText";
-deadText.style.borderRadius = "10px";
-document.body.appendChild(deadText);
-deadText.hidden = true;
-document.body.appendChild(deadText);
+deadText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+deadText.style.top = "5%";
+deadText.style.left = "1%"
+document.body.appendChild(deadDiv);
+deadDiv.appendChild(deadText);
+var xText = document.createElement('div');
+xText.style.position = 'absolute';
+xText.style.width = 100;
+xText.style.height = 100;
+xText.innerHTML = 'Press x to start again.';
+xText.id = "spaceText";
+xText.style.fontFamily = 'Montserrat';
+xText.style.fontSize = "xx-large";
+xText.style.color = "white";
+xText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+xText.style.top = 0.05 * window.innerHeight + 75 + 'px';
+xText.style.left = "1%";
+deadDiv.appendChild(xText);
+deadDiv.hidden = true;
 
+var parentDiv = document.createElement('div');
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
 scoreText.style.width = 100;
@@ -116,7 +149,8 @@ scoreText.style.fontSize = "xxx-large";
 scoreText.style.color = "white";
 scoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
  
-document.body.appendChild(scoreText);
+document.body.appendChild(parentDiv);
+parentDiv.appendChild(scoreText);
 
 var bestScoreText = document.createElement('div');
 bestScoreText.style.position = 'absolute';
@@ -129,7 +163,7 @@ bestScoreText.style.fontFamily = 'Montserrat';
 bestScoreText.style.fontSize = "xxx-large";
 bestScoreText.style.color = "white";
 bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
-document.body.appendChild(bestScoreText);
+parentDiv.appendChild(bestScoreText);
 
 
 
@@ -154,6 +188,21 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
+    console.log(scene.state.gameState);
+    if (scene.state.gameState === "waiting") {
+        welcomeDiv.hidden = false;
+        deadDiv.hidden = true;
+    }
+    if (scene.state.gameState === "active" && welcomeDiv.style.opacity > 0) {
+        welcomeDiv.hidden = false;
+        deadDiv.hidden = true;
+        welcomeDiv.style.opacity -= 0.003;
+    }
+    if (scene.state.gameState === "dead") {
+        deadDiv.hidden = false;
+        welcomeDiv.style.opacity = 2;
+        welcomeDiv.hidden = true;
+    }
  
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
@@ -171,18 +220,16 @@ const windowResizeHandler = () => {
     scoreText.style.right = scoreLeftPixels + "px";
     bestScoreText.style.top = scoreTopPixels + 50 + 'px';
     bestScoreText.style.right = scoreLeftPixels + "px";
-    welcomeText.style.top = scoreTopPixels + 'px';
-    welcomeText.style.left = 0.03 * window.innerWidth + welcomeText.style.width + "px";
-    deadText.style.top = scoreTopPixels + "px";
-    deadText.style.left = 0.03 * window.innerWidth + deadText.style.width + "px";
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
 
 document.body.onkeydown = function(e) {
     if (e.key == ' ' && !scene.state.pause) {
+        if (scene.state === "waiting") {
+            fadeOutEffect();
+        }
         scene.press();
-        welcomeText.hidden = true;
     } else if (e.key == 'x') {
         if (scene.isDead()) {
             scene.restart();

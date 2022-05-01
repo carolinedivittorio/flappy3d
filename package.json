@@ -1,6 +1,6 @@
 {
-  "name": "lower-case-dashed-name-of-project",
-  "repository": "REPOSITORY-NAME-AS-IT-APPEARS-IN-GITHUB-URL",
+  "name": "flappy-bird-three-d",
+  "repository": "flappy3d",
   "version": "0.1.0",
   "title": "Play Flappy Bird 3D",
   "description": "SHORT DESCRIPTION OF PROJECT HERE. ONE TO TWO SENTENCES MAX",
