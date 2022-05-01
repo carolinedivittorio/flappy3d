@@ -76,6 +76,13 @@ document.body.appendChild(canvas);
 // pausedContentDescription.innerHTML = 'Press the p key to unpause!';
 // pausedContentText.appendChild(pausedContentDescription);
 
+var welcomeText = document.createElement('div');
+welcomeText.style.width = 200;
+welcomeText.style.height = 200;
+welcomeText.innerHTML = "Welcome to Flappy Bird!";
+welcomeText.style.backgroundColor = "white";
+document.body.appendChild(welcomeText);
+
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
 scoreText.style.width = 100;
