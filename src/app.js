@@ -55,26 +55,26 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
-let pausedContainer = document.createElement('div');
-pausedContainer.id = 'paused';
-document.body.appendChild(pausedContainer);
+// let pausedContainer = document.createElement('div');
+// pausedContainer.id = 'paused';
+// document.body.appendChild(pausedContainer);
 
-var paused = false;
-let pausedContent = document.createElement('div');
-pausedContent.id = 'paused-content';
-pausedContainer.appendChild(pausedContent);
+// var paused = false;
+// let pausedContent = document.createElement('div');
+// pausedContent.id = 'paused-content';
+// pausedContainer.appendChild(pausedContent);
 
-let pausedContentText = document.createElement('div');
-pausedContentText.id = 'paused-text';
-pausedContent.appendChild(pausedContentText);
+// let pausedContentText = document.createElement('div');
+// pausedContentText.id = 'paused-text';
+// pausedContent.appendChild(pausedContentText);
 
-let pausedContentTitleText = document.createElement('h1');
-pausedContentTitleText.innerText = 'PAUSED';
-pausedContentText.appendChild(pausedContentTitleText);
+// let pausedContentTitleText = document.createElement('h1');
+// pausedContentTitleText.innerText = 'PAUSED';
+// pausedContentText.appendChild(pausedContentTitleText);
 
-let pausedContentDescription = document.createElement('p');
-pausedContentDescription.innerHTML = 'Press the p key to unpause!';
-pausedContentText.appendChild(pausedContentDescription);
+// let pausedContentDescription = document.createElement('p');
+// pausedContentDescription.innerHTML = 'Press the p key to unpause!';
+// pausedContentText.appendChild(pausedContentDescription);
 
 var scoreText = document.createElement('div');
 scoreText.style.position = 'absolute';
@@ -101,6 +101,11 @@ bestScoreText.style.fontSize = "xxx-large";
 bestScoreText.style.color = "white";
 bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
 document.body.appendChild(bestScoreText);
+
+
+var welcomeBoard = document.createElement('div');
+welcomeBoard.style.backgroundColor = "black";
+document.body.appendChild(welcomeBoard);
 
 
 
@@ -168,15 +173,3 @@ document.body.onkeyup = function(e) {
     }
 }
 
-
-var welcomeBoard = document.createElement('div');
-welcomeBoard.style.position = 'absolute';
-welcomeBoard.style.width = 100;
-welcomeBoarc.style.height = 100;
-welcomeBoard.innerHTML = 'Welcome to Flappy Bird';
-bestScoreText.id = "bestScoreText";
-bestScoreText.style.fontFamily = 'Montserrat';
-bestScoreText.style.fontSize = "xxx-large";
-bestScoreText.style.color = "white";
-bestScoreText.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
-document.body.appendChild(bestScoreText);
