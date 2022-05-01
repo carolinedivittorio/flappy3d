@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
 import { Flower, Icicle, Leaves, Ocean } from '../objects';
+
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
 
