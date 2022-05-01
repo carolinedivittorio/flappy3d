@@ -6,3 +6,4 @@ export * from './Icicle';
 export * from './Flower';
 export * from './Tree';
 export * from './Leaves';
+export * from './Ocean';

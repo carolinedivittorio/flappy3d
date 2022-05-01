@@ -2,7 +2,7 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
-import { Flower, Icicle, Leaves } from '../objects';
+import { Flower, Icicle, Leaves, Ocean } from '../objects';
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
 
@@ -68,6 +68,8 @@ class SeedScene extends Scene {
                 var newShell = new Shells(this);
                 this.add(newShell);
             }
+            var newOcean = new Ocean(this);
+            this.add(newOcean);
 
         }
 
