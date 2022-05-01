@@ -157,7 +157,7 @@ class SeedScene extends Scene {
                 var prob = Math.random();
                 if (prob < 0.3) {
                     var newTree = new Tree(this);
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 15; i++) {
                         var newLeaf = new Leaves(this);
                         this.add(newLeaf);
                     }
@@ -240,7 +240,7 @@ class SeedScene extends Scene {
                 const tree = new Tree(this);
                 this.add(tree);
         
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 15; i++) {
                     var newLeaf = new Leaves(this);
                     this.add(newLeaf);
                 }
@@ -296,6 +296,9 @@ class SeedScene extends Scene {
                                             4); 
             directionalLight2.castShadow = false;
             this.add(directionalLight2);
+            var directionalLight3 = new THREE.DirectionalLightHelper(0xffffff, 0.7)
+            directionalLight3.position.set(-10, 5, 4);
+            directionalLight3.castShadow = false;
         }
     }
 

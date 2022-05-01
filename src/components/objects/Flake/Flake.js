@@ -18,7 +18,7 @@ class Flake extends Group {
                 // model.position.x = this.state.x + 20;
                 // model.position.y = Math.random() * 2 - 1;
                 var size = Math.random();
-                model.scale.set(size * 0.1, size * 0.1, size * 0.1);
+                model.scale.set(size * 0.05, size * 0.05, size * 0.05);
                 // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
                 // model.rotation.x = -0.9 * Math.PI / 2;
                 this.castShadow = true;

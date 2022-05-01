@@ -50,7 +50,7 @@ class Leaves extends Group {
 
         this.position.x = this.position.x - stepSize;
         if (this.position.x < 2) {
-            this.position.y = Math.max(this.parent.state.floorHeight, this.position.y - 0.05);
+            this.position.y = Math.max(this.parent.state.floorHeight, this.position.y - 0.02);
         }
         
         // var step = 0.013;

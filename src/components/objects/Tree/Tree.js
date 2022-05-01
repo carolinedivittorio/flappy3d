@@ -14,7 +14,7 @@ class Tree extends Group {
                 // model.traverse((o) => {
                 // if (o.isMesh) o.material = newMaterial;
                 // });
-                // model.scale.set(Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25);
+                model.scale.set(100, 100, 100);
                 // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
                 // model.position.x = this.state.x + 20;
                 // model.position.y = Math.random() * 2 - 1;

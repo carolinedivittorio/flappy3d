@@ -25,6 +25,7 @@ class Flower extends Group {
             this.position.x = 10 + Math.random() * 2;
             this.position.y = -2;
             this.position.z = 2 - Math.random() * 4;
+            this.rotation.y = Math.PI;
         });
         // this.position.x = 3;
         // this.position.y = -5;
