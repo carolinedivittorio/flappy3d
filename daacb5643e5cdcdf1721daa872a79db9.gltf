@@ -510,7 +510,7 @@
     "buffers" : [
         {
             "byteLength" : 189792,
-            "uri" : "src/components/objects/Bird/bird.bin"
+            "uri" : "./bird.bin"
         }
     ]
 }
