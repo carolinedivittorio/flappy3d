@@ -156,7 +156,14 @@ var bestScoreText = document.createElement('div');
 bestScoreText.style.position = 'absolute';
 bestScoreText.style.width = 100;
 bestScoreText.style.height = 100;
-var bestScore = document.cookie === "" ? 0 : parseInt(document.cookie.split("=")[1]);
+
+var bestScore;
+if (document.cookie === "" || document.cookie.search('bestScore=') === -1) {
+    bestScore = 0;
+} else {
+    bestScore = document.cookie.split('; ').find(row => row.startsWith('bestScore=')).split('=')[1];
+}
+
 bestScoreText.innerHTML = 'Best: ' + bestScore;
 bestScoreText.id = "bestScoreText";
 bestScoreText.style.fontFamily = 'Montserrat';
