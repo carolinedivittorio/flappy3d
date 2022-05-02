@@ -1,0 +1,372 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 602,
+      "max": [
+        2.0219922065734863,
+        0.8099146485328674,
+        1.9822570085525513
+      ],
+      "min": [
+        -3.3568215370178223,
+        -0.9689537882804871,
+        -3.0282022953033447
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 7224,
+      "componentType": 5126,
+      "count": 602,
+      "max": [
+        0.9966816902160645,
+        0.9932997822761536,
+        1.0
+      ],
+      "min": [
+        -0.9999157190322876,
+        -0.9849556088447571,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 612,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 14448,
+      "componentType": 5126,
+      "count": 480,
+      "max": [
+        5.136006832122803,
+        3.3769240379333496,
+        8.02083969116211
+      ],
+      "min": [
+        -1.4688410758972168,
+        -3.3769240379333496,
+        -0.9673182964324951
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 20208,
+      "componentType": 5126,
+      "count": 480,
+      "max": [
+        0.9889567494392395,
+        0.9653655290603638,
+        0.9997683167457581
+      ],
+      "min": [
+        -0.9792354106903076,
+        -0.9999358057975769,
+        -0.9992113709449768
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 2448,
+      "componentType": 5125,
+      "count": 480,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 25968,
+      "componentType": 5126,
+      "count": 480,
+      "max": [
+        5.666015148162842,
+        3.606872081756592,
+        5.016110897064209
+      ],
+      "min": [
+        -3.100712776184082,
+        -2.8518974781036377,
+        0.7727413177490234
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 31728,
+      "componentType": 5126,
+      "count": 480,
+      "max": [
+        0.9837008714675903,
+        0.9717430472373962,
+        0.9743408560752869
+      ],
+      "min": [
+        -0.9888766407966614,
+        -0.9679089784622192,
+        -0.9953007102012634
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4368,
+      "componentType": 5125,
+      "count": 480,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "negar (https://sketchfab.com/negar)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/low-poly-tree-3aa522e8e9d645b68c732c06c504144d",
+      "title": "Low Poly Tree"
+    },
+    "generator": "Sketchfab-12.65.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 6288,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 37488,
+      "byteOffset": 6288,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 43776,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "brown",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0416159,
+          0.0187962,
+          0.00516069,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9937620280155661
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Orange",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1.0,
+          0.171537,
+          0.0,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9541560472745017
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Yellow",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1.0,
+          0.835194,
+          0.160952,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.7987618068733293
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "branches_brown_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "leaves_Orange_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "leaves_Yellow_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6
+          },
+          "indices": 8,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "6d6036ef64ee479a99acc64daa51e58d.fbx"
+    },
+    {
+      "children": [
+        3,
+        5
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        -10.35658550650258,
+        19.288504559281474,
+        -13.939892797894373,
+        0.0,
+        -19.14281261691779,
+        2.280454812277594,
+        17.377518052542545,
+        0.0,
+        14.13929787732696,
+        17.215661486549003,
+        13.316423612234615,
+        0.0,
+        165.19500732421875,
+        112.48410034179688,
+        85.9345932006836,
+        1.0
+      ],
+      "name": "branches"
+    },
+    {
+      "mesh": 0,
+      "name": "branches_brown_0"
+    },
+    {
+      "children": [
+        6,
+        7
+      ],
+      "matrix": [
+        21.690311431884766,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -3.5338002747030736e-06,
+        -21.690311431884478,
+        0.0,
+        0.0,
+        21.690311431884478,
+        -3.5338002747030736e-06,
+        0.0,
+        124.55669403076172,
+        100.60429382324219,
+        84.4407730102539,
+        1.0
+      ],
+      "name": "leaves"
+    },
+    {
+      "mesh": 1,
+      "name": "leaves_Orange_0"
+    },
+    {
+      "mesh": 2,
+      "name": "leaves_Yellow_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
