@@ -16,53 +16,44 @@ class Pipe extends Group {
             scored: false
          }
     
-        const offset = Math.random() * 2 - 1; // middle between pipes
-        // top pipe should start at offset + 1
-        // bottom pipe should end at offset - 1
-        this.state.bottomLength = offset - 1 - parent.state.floorHeight;
-        const topLength = parent.state.ceilingHeight - offset - 1;
+        const totalLength = parent.state.ceilingHeight - parent.state.floorHeight;
+        const gapLength = totalLength * 0.35;
+        const minLength = totalLength * 0.15;
+        const hatLength = totalLength * 0.05;
+        const offset = Math.random() * (totalLength - gapLength - 2 * minLength - 2 * hatLength);
+        this.state.bottomLength = minLength + offset;
+        const topLength = (totalLength - gapLength - 2 * minLength - 2 * hatLength) - offset + minLength;
+
 
         const pipeMaterial = new THREE.MeshPhongMaterial({color: 0x228b22, specular: 0xCCCCCC, shininess: 5});
         const bottomPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, this.state.bottomLength, 32);
         const bottomPipe = new THREE.Mesh(bottomPipeGeometry, pipeMaterial);
         bottomPipe.castShadow = true;
-        const bottomPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, this.state.bottomLength / 20, 32);
+        const bottomPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, hatLength, 32);
         const bottomPipeHat = new THREE.Mesh(bottomPipeGeometryHat, pipeMaterial);
         bottomPipeHat.castShadow = true;
 
 
-        // bottomPipe.scale.set(parent.state.height * 0.05, this.state.bottomLength, 1);
-
         const topPipeGeometry = new THREE.CylinderGeometry(0.2, 0.2, topLength, 32);
         const topPipe = new THREE.Mesh(topPipeGeometry, pipeMaterial);
-        const topPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, topLength / 20, 32);
+        const topPipeGeometryHat = new THREE.CylinderGeometry(0.25, 0.25, hatLength, 32);
         const topPipeHat = new THREE.Mesh(topPipeGeometryHat, pipeMaterial);
-        // topPipe.scale.set(parent.state.width * 0.05, topLength, 1);
         topPipe.castShadow = true;
         topPipeHat.castShadow = true;
 
         bottomPipe.position.z = 0;
-
-        // TODO: Julia's changes
-        // bottomPipe.position.x = 5; //parent.state.width / 2. ;
-        // bottomPipe.position.y = -1 - 5/2 + offset; //-parent.state.height / 2. ;
-
-        // topPipe.position.z = 0;
-        // topPipe.position.x = 5; //parent.state.width / 2. + topPipe.scale.x;
-        // topPipe.position.y = 1 + 5/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
-
-        bottomPipe.position.x = 7; //parent.state.width / 2. ;
-        bottomPipe.position.y = -1 - this.state.bottomLength/2 + offset; //-parent.state.height / 2. ;
+        bottomPipe.position.x = 7;
+        bottomPipe.position.y = parent.state.floorHeight + this.state.bottomLength / 2; 
         bottomPipeHat.position.z = 0;
         bottomPipeHat.position.x = 7;
-        bottomPipeHat.position.y = bottomPipe.position.y + this.state.bottomLength / 2 + this.state.bottomLength / 40;
+        bottomPipeHat.position.y = parent.state.floorHeight + this.state.bottomLength + hatLength / 2;
 
         topPipe.position.z = 0;
-        topPipe.position.x = 7; //parent.state.width / 2. + topPipe.scale.x;
-        topPipe.position.y = 1 + topLength/2 + offset; //parent.state.height / 2. - topPipe.scale.y / 2.;
+        topPipe.position.x = 7; 
+        topPipe.position.y = parent.state.ceilingHeight - topLength / 2;
         topPipeHat.position.z = 0;
         topPipeHat.position.x = 7;
-        topPipeHat.position.y = topPipe.position.y - topLength / 2 - topLength / 40;
+        topPipeHat.position.y = parent.state.ceilingHeight - topLength - hatLength / 2;
 
         this.add(bottomPipe);
         this.add(bottomPipeHat);
@@ -77,9 +68,7 @@ class Pipe extends Group {
         if (this.state.parent.state.gameState !== "active") {
             return;
         }
-        var birdBox = new THREE.Box3().setFromObject(this.state.bird.children[0]);//new THREE.Sphere();
-        //birdBox.radius = this.state.bird.children[0].geometry.boundingSphere.radius;
-      //  birdBox.center = this.state.bird.position;
+        var birdBox = new THREE.Box3().setFromObject(this.state.bird.children[0]);
         var box;
         for (var i = 0; i < this.children.length; i++) {
             this.children[i].position.set(
@@ -96,8 +85,7 @@ class Pipe extends Group {
             if (!this.state.scored) {
                 this.state.parent.state.score++;
                 console.log(this.state.parent.state.score);
-           //     this.state.parent.state.document.getElementById('score_text').innerHTML = 'Score: ' + this.state.parent.state.score;
-                this.state.scored = true;
+                     this.state.scored = true;
             }
         }
     }

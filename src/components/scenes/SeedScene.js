@@ -25,7 +25,7 @@ class SeedScene extends Scene {
             steps: 0,
             frustum: frustum,
             floorHeight: -2,
-            ceilingHeight: 5,
+            ceilingHeight: 3,
             pause: false,
             season: 0,
             seasons_list: ["fall", "winter", "spring", "summer"]
