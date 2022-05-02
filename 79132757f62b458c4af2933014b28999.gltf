@@ -3,49 +3,49 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 33391,
+      "count": 694,
       "max": [
-        0.21746885776519775,
-        -0.003851937362924218,
-        0.00920812040567398
+        3.373379945755005,
+        0.37665000557899475,
+        3.8872499465942383
       ],
       "min": [
-        -0.010298456996679306,
-        -0.19776961207389832,
-        -2.136026382446289
+        -3.373379945755005,
+        -0.37665000557899475,
+        -3.8866000175476074
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
-      "byteOffset": 400692,
+      "byteOffset": 8328,
       "componentType": 5126,
-      "count": 33391,
+      "count": 694,
       "max": [
-        0.9999873638153076,
-        0.9999954104423523,
-        0.9999982714653015
+        1.0,
+        1.0,
+        0.999995768070221
       ],
       "min": [
-        -0.999999463558197,
-        -0.9999922513961792,
-        -0.9986630082130432
+        -1.0,
+        -1.0,
+        -0.9999874830245972
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 198978,
+      "count": 1584,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "Maxim Gehricke (https://sketchfab.com/maxim_gehricke)",
-      "license": "CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)",
-      "source": "https://sketchfab.com/3d-models/icicle-58fd3342c14248679d89ec35558f33c3",
-      "title": "Icicle"
+      "author": "DoomShroom19 (https://sketchfab.com/DoomShroom19)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/snowflake-5cb68fa2bd1a43eca4f0fc7f5c676a8d",
+      "title": "Snowflake"
     },
     "generator": "Sketchfab-12.66.0",
     "version": "2.0"
@@ -53,14 +53,14 @@
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 795912,
+      "byteLength": 6336,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 801384,
-      "byteOffset": 795912,
+      "byteLength": 16656,
+      "byteOffset": 6336,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
@@ -68,38 +68,23 @@
   ],
   "buffers": [
     {
-      "byteLength": 1597296,
-      "uri": "src/components/objects/Icicle/scene.bin"
+      "byteLength": 22992,
+      "uri": "src/components/objects/Flake/scene.bin"
     }
-  ],
-  "extensionsUsed": [
-    "KHR_materials_transmission"
   ],
   "materials": [
     {
-      "alphaMode": "BLEND",
       "doubleSided": true,
-      "extensions": {
-        "KHR_materials_transmission": {
-          "transmissionFactor": 0.9314080465011644
-        }
-      },
-      "name": "material_0",
+      "name": "Root",
       "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          0.21451610941879626,
-          0.21451610941879626,
-          0.21451610941879626,
-          0.25
-        ],
         "metallicFactor": 0.0,
-        "roughnessFactor": 0.23883680207212302
+        "roughnessFactor": 0.6
       }
     }
   ],
   "meshes": [
     {
-      "name": "Object_0",
+      "name": "Cube_0",
       "primitives": [
         {
           "attributes": {
@@ -140,13 +125,47 @@
     },
     {
       "children": [
-        2
+        2,
+        4
       ],
-      "name": "icicle1.obj.cleaner.materialmerger.gles"
+      "name": "Root"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        -0.29086000000000006,
+        0.9551700000000001,
+        -0.05519000000000001,
+        0.0,
+        -0.7711,
+        -0.19988000000000003,
+        0.6045200000000001,
+        0.0,
+        0.5663900000000001,
+        0.21839000000000003,
+        0.7946700000000001,
+        0.0,
+        4.076250000000001,
+        1.00545,
+        5.903860000000001,
+        1.0
+      ],
+      "name": "Lamp"
+    },
+    {
+      "name": "Lamp"
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "Cube"
     },
     {
       "mesh": 0,
-      "name": "Object_2"
+      "name": "Cube_0"
     }
   ],
   "scene": 0,
