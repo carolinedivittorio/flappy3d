@@ -2,9 +2,8 @@ import { Group, Mesh } from 'three';
 import * as THREE from 'three';
 import MODEL from './scene.gltf';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Leaves } from '../Leaves';
-class Tree extends Group {
-    addTree() {
+class Flake extends Group {
+    addFlake() {
         const loader = new GLTFLoader();
         loader.load(
             MODEL,
@@ -14,10 +13,15 @@ class Tree extends Group {
                 // model.traverse((o) => {
                 // if (o.isMesh) o.material = newMaterial;
                 // });
-                model.scale.set(100, 100, 100);
+                // model.scale.set(Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25);
                 // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
                 // model.position.x = this.state.x + 20;
                 // model.position.y = Math.random() * 2 - 1;
+                var size = Math.random();
+                model.scale.set(size * 0.05, size * 0.05, size * 0.05);
+                // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
+                // model.rotation.x = -0.9 * Math.PI / 2;
+                this.castShadow = true;
                 this.add(model);
             }
         );
@@ -28,19 +32,18 @@ class Tree extends Group {
 
         // Init state
         this.state = {
+            fallSpeed: Math.random() * 0.05,
             // cloudTime: 2000,
             // x: 0,
             // parent: parent
         };
-        // const newLeaf = new Leaves(this);
-        // this.add(newLeaf);
-
-        this.addTree();
-        this.position.x = 7;
-        this.position.y = -2.2;
+        console.log("adding new flake");
+        this.addFlake();
+        this.position.x = 8 + Math.random() * 2;
+        this.position.y = 5 + Math.random() * 10;
         this.position.z = -1.5;
-        this.scale.set(0.01, 0.01, 0.01);
-        this.castShadow = true;
+
+       
         parent.addToUpdateList(this);
 
     }
@@ -48,6 +51,10 @@ class Tree extends Group {
     update(timeStamp, stepSize) {
 
         this.position.x = this.position.x - stepSize;
+        if (this.position.x < 2) {
+            this.position.y = Math.max(this.parent.state.floorHeight, this.position.y - this.state.fallSpeed);
+        }
+        
         // var step = 0.013;
         // if (this.state.parent.state.gameState !== "active") {
         //     step = 0.003;
@@ -71,4 +78,4 @@ class Tree extends Group {
     }
 }
 
-export default Tree;
+export default Flake;

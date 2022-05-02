@@ -1,10 +1,12 @@
 import { Scene, Color } from 'three';
 import * as THREE from 'three';
-import { Bird, Pipe, Floor, Cloud } from 'objects';
+import { Bird, Pipe, Floor, Cloud, Snowman } from 'objects';
 import { BasicLights } from 'lights';
-import { Flower, Icicle, Leaves } from '../objects';
+import { Boat, Flake, Flower, Icicle, Leaves, Ocean, Hut } from '../objects';
+
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
+import { Ball } from '../objects/Ball';
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -61,6 +63,9 @@ class SeedScene extends Scene {
                 var newFlower = new Flower(this);
                 this.add(newFlower);
             }
+            // var newHut = new Hut(this);
+            // this.add(newHut);
+            
         } 
 
         else if (this.state.seasons_list[this.state.season] == "summer") {
@@ -68,11 +73,25 @@ class SeedScene extends Scene {
                 var newShell = new Shells(this);
                 this.add(newShell);
             }
+            var newOcean = new Ocean(this);
+            this.add(newOcean);
+
+            var newBoat = new Boat(this);
+            this.add(newBoat);
+
+            var newBall = new Ball(this);
+            this.add(newBall);
 
         }
 
-        else if (this.state.seasons_list[this.state.season] == "spring") {
+        else if (this.state.seasons_list[this.state.season] == "winter") {
+            const snowman = new Snowman(this);
+            this.add(snowman);
 
+            for (var i = 0; i < 100; i++) {
+                var newFlake = new Flake(this);
+                this.add(newFlake);
+            }
         }
   
     
@@ -93,6 +112,15 @@ class SeedScene extends Scene {
         directionalLight2.castShadow = false;
         this.add(directionalLight2);
 
+        var directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.7)
+            directionalLight3.position.set(-10, 5, 4);
+            directionalLight3.castShadow = false;
+
+        // this.add(directionalLight3);
+        var directionalLight4 = new THREE.DirectionalLight(0xffffff, 0.7)
+        directionalLight4.position.set(0, 10, -10);
+        directionalLight4.castShadow = false;
+        // this.add(directionalLight4);
         
     }
 
@@ -135,13 +163,19 @@ class SeedScene extends Scene {
                     var newFlower = new Flower(this);
                     this.add(newFlower);
                 }
+                // var prob = Math.random();
+                // if (prob < 0.1) {
+                //     var newHut = new Hut(this);
+                //     this.add(newHut);
+                // }
+
             }
 
             else if (this.state.seasons_list[this.state.season] === "fall") {
                 var prob = Math.random();
                 if (prob < 0.3) {
                     var newTree = new Tree(this);
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 15; i++) {
                         var newLeaf = new Leaves(this);
                         this.add(newLeaf);
                     }
@@ -153,6 +187,22 @@ class SeedScene extends Scene {
                 for (let i = 0; i < 10; i++) {
                     var newShell = new Shells(this);
                     this.add(newShell);
+                }
+                var prob = Math.random();
+                if (prob < 0.2) {
+                    var newBall = new Ball(this);
+                    this.add(newBall);
+                }
+                var prob = Math.random();
+                if (prob < 0.1) {
+                    var newBoat = new Boat(this);
+                    this.add(newBoat);
+                }
+            }
+            else if (this.state.seasons_list[this.state.season] === "winter") {
+                for (var i = 0; i < 100; i++) {
+                    var newFlake = new Flake(this);
+                    this.add(newFlake);
                 }
             }
             
@@ -203,13 +253,12 @@ class SeedScene extends Scene {
             this.add(cloud);
       
             // pick a season
-            console.log(this.state.seasons_list[this.state.season]);
             // Add seasonal meshes to screen
             if (this.state.seasons_list[this.state.season] == "fall") {
                 const tree = new Tree(this);
                 this.add(tree);
         
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 15; i++) {
                     var newLeaf = new Leaves(this);
                     this.add(newLeaf);
                 }
@@ -220,6 +269,8 @@ class SeedScene extends Scene {
                     var newFlower = new Flower(this);
                     this.add(newFlower);
                 }
+                // var newHut = new Hut(this);
+                // this.add(newHut);
             } 
 
             else if (this.state.seasons_list[this.state.season] == "summer") {
@@ -227,12 +278,29 @@ class SeedScene extends Scene {
                     var newShell = new Shells(this);
                     this.add(newShell);
                 }
+                var newOcean = new Ocean(this);
+                this.add(newOcean);
+
+                var newBoat = new Boat(this);
+                this.add(newBoat);
+
+                var newBall = new Ball(this);
+                this.add(newBall);
+
             }
 
-            else if (this.state.seasons_list[this.state.season] == "spring") {
+            else if (this.state.seasons_list[this.state.season] == "winter") {
+                const snowman = new Snowman(this);
+                this.add(snowman);
 
+                for (var i = 0; i < 100; i++) {
+                    var newFlake = new Flake(this);
+                    this.add(newFlake);
+                }
             }
-          
+    
+
+            
             var directionalLight = new THREE.DirectionalLight(0xffffff,
                                                                 0.7);
             directionalLight.position.set( 2, 
@@ -248,6 +316,9 @@ class SeedScene extends Scene {
                                             4); 
             directionalLight2.castShadow = false;
             this.add(directionalLight2);
+            var directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.7)
+            directionalLight3.position.set(-10, 5, 4);
+            directionalLight3.castShadow = false;
         }
     }
 

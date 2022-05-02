@@ -22,7 +22,7 @@ class Floor extends Group {
         if (this.state.parent.state.seasons_list[this.state.parent.state.season] == "summer") {
              floorMaterial = new THREE.MeshStandardMaterial({color: 0xf2d16b});
         } else if (this.state.parent.state.seasons_list[this.state.parent.state.season] === "winter") {
-            floorMaterial = new THREE.MeshStandardMaterial({color: 0x0ff7fa});
+            floorMaterial = new THREE.MeshStandardMaterial({color: 0x0ffffff});
         } else {
             floorMaterial = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
         }
