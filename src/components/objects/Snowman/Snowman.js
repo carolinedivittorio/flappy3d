@@ -7,7 +7,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import MODEL from './untitled.gltf';
 import { Group } from 'three';
 import * as THREE from 'three';
-
+import OBJ from './snowman.obj';
+import MTL from './snowman.mtl';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
 
 class Snowman extends Group {
@@ -22,17 +23,20 @@ class Snowman extends Group {
             // spin: this.spin.bind(this),
             twirl: 0,
         };
-
-        // Load object
         var scene = this;
-        const loader = new GLTFLoader();
-
-        loader.load(MODEL, (gltf) => {
-            this.add(gltf.scene);
-            this.position.x = 10 + Math.random() * 2;
-            this.position.y = -2;
-            this.position.z = -1 - Math.random() * 3;
-        });
+        var mtlLoader = new MTLLoader();
+        mtlLoader.load(MTL, function(materials) {
+            materials.preload();
+            var objLoader = new OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load(OBJ, function(model) {
+                model.scale.set(1, 1, 1);
+                scene.add(model);
+            });
+            });
+        this.position.x = 10 + Math.random() * 2;
+        this.position.y = -2;
+        this.position.z = -1 - Math.random() * 3;
         this.scale.set(0.5, 0.5, 0.5)
 
         // Add self to parent's update list
