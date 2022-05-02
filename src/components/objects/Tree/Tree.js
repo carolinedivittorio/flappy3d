@@ -36,7 +36,7 @@ class Tree extends Group {
         // this.add(newLeaf);
 
         this.addTree();
-        this.position.x = 7;
+        this.position.x = 8;
         this.position.y = -2.2;
         this.position.z = -1.5;
         this.scale.set(0.01, 0.01, 0.01);

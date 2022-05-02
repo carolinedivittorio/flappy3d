@@ -44,7 +44,6 @@ camera.updateProjectionMatrix();
 
 var frustum = new THREE.Frustum();
 frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));  
-console.log(frustum.containsPoint(new THREE.Vector3(0, 1, 0)));
 const scene = new SeedScene(960, 960 * window.innerHeight / window.innerWidth, document, frustum);
 
 // Set up renderer, canvas, and minor CSS adjustments
@@ -195,7 +194,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
-    console.log(scene.state.gameState);
     if (scene.state.gameState === "waiting") {
         welcomeDiv.hidden = false;
         deadDiv.hidden = true;
@@ -244,15 +242,15 @@ document.body.onkeydown = function(e) {
 
         }
     } else if (e.key == 'p') {
-        if (!paused) {
-            pausedContainer.style.display = 'flex';
-            console.log("PAUSE");
-        } else {
-            pausedContainer.style.display = 'none';
-            console.log("UNPAUSE");
-        }
-        paused = !paused;
-        scene.state.pause = !scene.state.pause;
+        // if (!paused) {
+        //     pausedContainer.style.display = 'flex';
+        //     console.log("PAUSE");
+        // } else {
+        //     pausedContainer.style.display = 'none';
+        //     console.log("UNPAUSE");
+        // }
+        // paused = !paused;
+        // scene.state.pause = !scene.state.pause;
     }
 }
 

@@ -40,7 +40,6 @@ class Shells extends Group {
             // x: 0,
             // parent: parent
         };
-        console.log("creating a new shell");
         
 
         const objLoader = new OBJLoader()
@@ -63,10 +62,8 @@ class Shells extends Group {
                 object.position.z = 1.5 - Math.random() * 3;
             },
             (xhr) => {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
             },
             (error) => {
-                console.log(error)
             }
         )
 

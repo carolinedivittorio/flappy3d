@@ -31,7 +31,6 @@ class Hut extends Group {
         };
 
         this.addOcean();
-        console.log(this);
         this.position.y = -2;
         this.position.z = -1.5;
         this.position.x = 8;

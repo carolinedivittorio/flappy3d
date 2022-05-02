@@ -32,7 +32,6 @@ class Ball extends Group {
         };
 
         this.addBall();
-        console.log(this);
         this.position.y = -1.85;
         this.position.z = -1 + Math.random() * 2;
         this.position.x = 5;

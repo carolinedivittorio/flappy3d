@@ -33,11 +33,11 @@ class Flake extends Group {
         // Init state
         this.state = {
             fallSpeed: Math.random() * 0.05,
+            threshold: Math.random() * 13 - 6
             // cloudTime: 2000,
             // x: 0,
             // parent: parent
         };
-        console.log("adding new flake");
         this.addFlake();
         this.position.x = 8 + Math.random() * 2;
         this.position.y = 5 + Math.random() * 10;
@@ -51,7 +51,7 @@ class Flake extends Group {
     update(timeStamp, stepSize) {
 
         this.position.x = this.position.x - stepSize;
-        if (this.position.x < 2) {
+        if (this.position.x < this.state.threshold) {
             this.position.y = Math.max(this.parent.state.floorHeight, this.position.y - this.state.fallSpeed);
         }
         

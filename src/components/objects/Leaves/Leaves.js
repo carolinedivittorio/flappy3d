@@ -34,10 +34,10 @@ class Leaves extends Group {
             // cloudTime: 2000,
             // x: 0,
             // parent: parent
+            threshold: Math.random() * 2 + 1
         };
-        console.log("adding new leaf");
         this.addLeaf();
-        this.position.x = 6 + Math.random() * 2;
+        this.position.x = 7 + Math.random() * 2;
         this.position.y = 0;
         this.position.z = -1.5;
 
@@ -49,22 +49,9 @@ class Leaves extends Group {
     update(timeStamp, stepSize) {
 
         this.position.x = this.position.x - stepSize;
-        if (this.position.x < 2) {
+        if (this.position.x < this.state.threshold) {
             this.position.y = Math.max(this.parent.state.floorHeight, this.position.y - 0.02);
         }
-        
-        // var step = 0.013;
-        // if (this.state.parent.state.gameState !== "active") {
-        //     step = 0.003;
-        //     this.state.cloudTime += .01 / .013
-        // }
-        // if (this.state.cloudTime <= 0) {
-        //     this.addCloud();
-        //     this.state.cloudTime = 2000;
-        // }
-        // this.state.cloudTime--;
-        // this.position.x -= step;
-        // this.state.x += step;
     }
 
     pause() {

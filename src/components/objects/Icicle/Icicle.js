@@ -6,7 +6,6 @@ import MODEL from './scene.gltf';
 class Icicle extends Group {
 
     addIcicle(x, y, z) {
-        console.log('creating new icicle');
         const loader = new GLTFLoader();
         loader.load(
             MODEL,
