@@ -1,30 +1,41 @@
 import { Group, Mesh } from 'three';
 import * as THREE from 'three';
 import MODEL from './scene.gltf';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import FLAKE from './flake.obj';
 class Flake extends Group {
     addFlake() {
-        const loader = new GLTFLoader();
-        loader.load(
-            MODEL,
-            (gltf) => {
-                var model = gltf.scene;
-                // var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
-                // model.traverse((o) => {
-                // if (o.isMesh) o.material = newMaterial;
-                // });
-                // model.scale.set(Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25);
-                // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
-                // model.position.x = this.state.x + 20;
-                // model.position.y = Math.random() * 2 - 1;
-                var size = Math.random();
-                model.scale.set(size * 0.05, size * 0.05, size * 0.05);
-                // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
-                // model.rotation.x = -0.9 * Math.PI / 2;
-                this.castShadow = true;
-                this.add(model);
-            }
-        );
+        var scene = this;
+        var objLoader = new OBJLoader();
+        objLoader.load(FLAKE, function(model) {
+            var size = Math.random();
+            model.scale.set(size * 0.05, size * 0.05, size * 0.05);
+            // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
+            // model.rotation.x = -0.9 * Math.PI / 2;
+            scene.castShadow = true;
+            scene.add(model);
+        });
+        // const loader = new GLTFLoader();
+        // loader.load(
+        //     MODEL,
+        //     (gltf) => {
+        //         var model = gltf.scene;
+        //         // var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
+        //         // model.traverse((o) => {
+        //         // if (o.isMesh) o.material = newMaterial;
+        //         // });
+        //         // model.scale.set(Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25);
+        //         // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
+        //         // model.position.x = this.state.x + 20;
+        //         // model.position.y = Math.random() * 2 - 1;
+        //         var size = Math.random();
+        //         model.scale.set(size * 0.05, size * 0.05, size * 0.05);
+        //         // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
+        //         // model.rotation.x = -0.9 * Math.PI / 2;
+        //         this.castShadow = true;
+        //         this.add(model);
+        //     }
+        // );
     }
     constructor(parent) {
         // Call parent Group() constructor
