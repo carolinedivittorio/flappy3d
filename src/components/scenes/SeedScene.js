@@ -2,13 +2,9 @@ import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud } from 'objects';
 import { BasicLights } from 'lights';
-<<<<<<< HEAD
-import { Flower, Snowman } from '../objects';
-=======
 import { Flower, Icicle, Leaves } from '../objects';
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
->>>>>>> 3aa2a855a0f7193a6a9ff226832a9f3a71622199
 
 class SeedScene extends Scene {
     constructor(width, height, document, frustum) {
@@ -27,7 +23,7 @@ class SeedScene extends Scene {
             steps: 0,
             frustum: frustum,
             floorHeight: -2,
-            ceilingHeight: 5,
+            ceilingHeight: 3,
             pause: false,
             season: 0,
             seasons_list: ["fall", "winter", "spring", "summer"]
