@@ -1,26 +1,43 @@
 import { Group, Mesh } from 'three';
 import * as THREE from 'three';
 import MODEL from './scene.gltf';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { Leaves } from '../Leaves';
+import TREE from './newtree.obj';
+import TREEMTL from './newtree.mtl';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 class Tree extends Group {
     addTree() {
-        const loader = new GLTFLoader();
-        loader.load(
-            MODEL,
-            (gltf) => {
-                var model = gltf.scene;
-                // var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
-                // model.traverse((o) => {
-                // if (o.isMesh) o.material = newMaterial;
-                // });
-                model.scale.set(100, 100, 100);
-                // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
-                // model.position.x = this.state.x + 20;
-                // model.position.y = Math.random() * 2 - 1;
-                this.add(model);
-            }
-        );
+        var scene = this;
+        var mtlLoader = new MTLLoader();
+        mtlLoader.load(TREEMTL, function(materials) {
+            materials.preload();
+            var objLoader = new OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load(TREE, function(model) {
+               // model.scale.set(100, 100, 100);
+               model.scale.set(1.5, 1.5, 1.5);
+                scene.add(model);
+            });
+        })
+            
+
+        // const loader = new GLTFLoader();
+        // loader.load(
+        //     MODEL,
+        //     (gltf) => {
+        //         var model = gltf.scene;
+        //         // var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
+        //         // model.traverse((o) => {
+        //         // if (o.isMesh) o.material = newMaterial;
+        //         // });
+        //         model.scale.set(100, 100, 100);
+        //         // model.rotation.y = Math.random() * Math.PI / 4 - Math.PI / 2;
+        //         // model.position.x = this.state.x + 20;
+        //         // model.position.y = Math.random() * 2 - 1;
+        //         this.add(model);
+        //     }
+        // );
     }
     constructor(parent) {
         // Call parent Group() constructor
@@ -36,10 +53,10 @@ class Tree extends Group {
         // this.add(newLeaf);
 
         this.addTree();
-        this.position.x = 8;
+        this.position.x = 6;
         this.position.y = -2.2;
-        this.position.z = -1.5;
-        this.scale.set(0.01, 0.01, 0.01);
+        this.position.z = -2;
+        this.scale.set(0.01, 0.01, 0.007);
         this.castShadow = true;
         parent.addToUpdateList(this);
 
