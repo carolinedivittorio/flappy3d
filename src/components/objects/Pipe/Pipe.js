@@ -84,8 +84,7 @@ class Pipe extends Group {
         if (box.max.x < birdBox.min.x) {
             if (!this.state.scored) {
                 this.state.parent.state.score++;
-                console.log(this.state.parent.state.score);
-                     this.state.scored = true;
+                this.state.scored = true;
             }
         }
     }

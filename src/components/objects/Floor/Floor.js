@@ -13,10 +13,6 @@ class Floor extends Group {
             parent: parent
          }
 
-
-         console.log('setting my floor');
-         console.log(this.state.parent.state.seasons_list[this.state.parent.state.season]);
-
         const floorGeometry = new THREE.BoxGeometry(10000, 0.2, 4);
         var floorMaterial;
         if (this.state.parent.state.seasons_list[this.state.parent.state.season] == "summer") {

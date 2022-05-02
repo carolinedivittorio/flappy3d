@@ -31,7 +31,6 @@ class Boat extends Group {
         };
 
         this.addOcean();
-        console.log(this);
         this.position.y = -2;
         this.position.z = -30;
         this.position.x = 8;

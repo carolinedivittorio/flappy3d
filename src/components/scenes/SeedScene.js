@@ -28,7 +28,8 @@ class SeedScene extends Scene {
             ceilingHeight: 3,
             pause: false,
             season: 0,
-            seasons_list: ["fall", "winter", "spring", "summer"]
+            seasons_list: ["fall", "winter", "spring", "summer"],
+            lastTree: 0
         };
 
         // Set background to a nice color
@@ -46,7 +47,6 @@ class SeedScene extends Scene {
         this.add(cloud);
 
 
-        console.log(this.state.seasons_list[this.state.season]);
         // Add seasonal meshes to screen
         if (this.state.seasons_list[this.state.season] == "fall") {
             const tree = new Tree(this);
@@ -88,7 +88,7 @@ class SeedScene extends Scene {
             const snowman = new Snowman(this);
             this.add(snowman);
 
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 10; i++) {
                 var newFlake = new Flake(this);
                 this.add(newFlake);
             }
@@ -172,15 +172,20 @@ class SeedScene extends Scene {
             }
 
             else if (this.state.seasons_list[this.state.season] === "fall") {
-                var prob = Math.random();
-                if (prob < 0.3) {
-                    var newTree = new Tree(this);
-                    for (let i = 0; i < 15; i++) {
-                        var newLeaf = new Leaves(this);
-                        this.add(newLeaf);
+                if (this.state.lastTree < 5) {
+                    this.state.lastTree++;
+                } else {
+                    var prob = Math.random();
+                    if (prob < 0.3) {
+                        this.state.lastTree = 0;
+                        var newTree = new Tree(this);
+                        for (let i = 0; i < 15; i++) {
+                            var newLeaf = new Leaves(this);
+                            this.add(newLeaf);
+                        }
+                        this.add(newTree);
                     }
-                    this.add(newTree);
-                }
+                 }
             }
 
             else if (this.state.seasons_list[this.state.season] === "summer") {
@@ -200,7 +205,7 @@ class SeedScene extends Scene {
                 }
             }
             else if (this.state.seasons_list[this.state.season] === "winter") {
-                for (var i = 0; i < 100; i++) {
+                for (var i = 0; i < 10; i++) {
                     var newFlake = new Flake(this);
                     this.add(newFlake);
                 }
@@ -217,6 +222,7 @@ class SeedScene extends Scene {
 
         for (const obj of this.state.updateList) {
             obj.update(timeStamp, step);
+            
         }
 
         this.state.document.getElementById('scoreText').innerHTML = this.state.score;
@@ -293,7 +299,7 @@ class SeedScene extends Scene {
                 const snowman = new Snowman(this);
                 this.add(snowman);
 
-                for (var i = 0; i < 100; i++) {
+                for (var i = 0; i < 10; i++) {
                     var newFlake = new Flake(this);
                     this.add(newFlake);
                 }
