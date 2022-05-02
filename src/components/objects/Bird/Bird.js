@@ -2,8 +2,13 @@ import { Group, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
 import MODEL from './bird.gltf';
-import MODELFLAPS from './birdflaps.gltf';
+import MODELFLAPS from './birdflaps2.gltf';
+import OBJFLAPS from './birdFlaps.obj';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import FLAPSMTL from './birdFlaps.mtl';
 import * as THREE from 'three';
+import OBJ from './bird.obj';
 
 class Bird extends Group {
     constructor(parent) {
@@ -21,34 +26,64 @@ class Bird extends Group {
             stopped: false,
             floorHeight: parent.state.floorHeight
         };
+        // const loader = new GLTFLoader();
+        // loader.load(
+        //     MODEL,
+        //     (gltf) => {
+        //         var model = gltf.scene;
+        //         model.scale.set(0.08, 0.08, 0.08);
+        //         model.rotation.y = Math.PI;
+        //         model.rotation.z = Math.PI;
+        //         model.rotation.y += Math.PI / 2;
+        //         model.visible = true;
+        //         model.castShadow = true;
+        //         this.add(model);
+        //     }
+        // );
 
-        const loader = new GLTFLoader();
-        loader.load(
-            MODEL,
-            (gltf) => {
-                var model = gltf.scene;
-                model.scale.set(0.08, 0.08, 0.08);
-                model.rotation.y = Math.PI;
-                model.rotation.z = Math.PI;
-                model.rotation.y += Math.PI / 2;
-                model.visible = true;
-                model.castShadow = true;
-                this.add(model);
-            }
-        );
-        loader.load(
-            MODELFLAPS,
-            (gltf) => {
-                var model = gltf.scene;
-                model.scale.set(0.08, 0.08, 0.08);
-                model.rotation.y = Math.PI;
-                model.rotation.z = Math.PI;
-                model.rotation.y += Math.PI / 2;
-                model.visible = false;
-                model.castShadow = true;
-                this.add(model);
-            }
-        );
+        var scene = this;
+
+        var mtlLoader = new MTLLoader();
+mtlLoader.load(FLAPSMTL, function(materials) {
+  materials.preload();
+  var objLoader = new OBJLoader();
+  objLoader.setMaterials(materials);
+  objLoader.load(OBJ, function(model) {
+    model.scale.set(0.08, 0.08, 0.08);
+    model.rotation.y = Math.PI;
+    model.rotation.z = Math.PI;
+    model.rotation.y += Math.PI / 2;
+    model.visible = true;
+    model.castShadow = true;
+    scene.add(model);
+  });
+  objLoader.load(OBJFLAPS, function(model) {
+    model.scale.set(0.08, 0.08, 0.08);
+    model.rotation.y = Math.PI;
+    model.rotation.z = Math.PI;
+    model.rotation.y += Math.PI / 2;
+    model.visible = false;
+    model.castShadow = true;
+    scene.add(model);
+  });
+});
+
+
+
+       
+        // loader.load(
+        //     MODELFLAPS,
+        //     (gltf) => {
+        //         var model = gltf.scene;
+        //         model.scale.set(0.08, 0.08, 0.08);
+        //         model.rotation.y = Math.PI;
+        //         model.rotation.z = Math.PI;
+        //         model.rotation.y += Math.PI / 2;
+        //         model.visible = false;
+        //         model.castShadow = true;
+        //         this.add(model);
+        //     }
+        // );
 
         this.castShadow = true;
         this.receiveShadow = true;
