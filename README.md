@@ -21,7 +21,7 @@ All models were downloaded from free online 3D model databases:
 
 * [Ocean](https://sketchfab.com/3d-models/ocean-model-50f21b06c6e644e196b2ac828eda97dc)
 
-* [Beachball](https://sketchfab.com/3d-models/beachball-ee18423fb5a54fa6bfb07094848feb70)
+* [Beach Ball](https://sketchfab.com/3d-models/beachball-ee18423fb5a54fa6bfb07094848feb70)
 
 * [Shells](https://www.turbosquid.com/3d-models/3d-shell-1562122)
 
