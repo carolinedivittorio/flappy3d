@@ -1,24 +1,26 @@
 import { Group, Mesh } from 'three';
 import * as THREE from 'three';
 import MODEL from './scene.gltf';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+import OBJ from './beachball.obj';
+import MTL from './beachball.mtl';
 
 class Ball extends Group {
     addBall() {
-        const loader = new GLTFLoader();
-        loader.load(
-            MODEL,
-            (gltf) => {
-                var model = gltf.scene;
-                // var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, opacity: 0.7});
-                // model.traverse((o) => {
-                // if (o.isMesh) o.material = newMaterial;
-                // });
-                model.scale.set(1, 1, 1);
-                this.add(model);
-            }
-        );
+        var scene = this;
+        var mtlLoader = new MTLLoader();
+        mtlLoader.load(MTL, function(materials) {
+            materials.preload();
+            var objLoader = new OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load(OBJ, function(model) {
+                model.scale.set(0.3, 0.3, 0.3);
+                model.rotation.x = Math.random() * Math.PI;
+                scene.add(model);
+            });
+            });
+
     }
     constructor(parent) {
         // Call parent Group() constructor
