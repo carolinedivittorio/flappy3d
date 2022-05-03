@@ -1,7 +1,5 @@
 import { Group } from 'three';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-// import MODEL from './land.gltf';
 
 class Pipe extends Group {
     constructor(parent) {
@@ -87,14 +85,6 @@ class Pipe extends Group {
                 this.state.scored = true;
             }
         }
-    }
-
-    pause() {
-
-    }
-
-    resume() {
-
     }
 }
 

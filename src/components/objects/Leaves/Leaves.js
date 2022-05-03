@@ -1,6 +1,4 @@
-import { Group, Mesh } from 'three';
-import * as THREE from 'three';
-import MODEL from './scene.gltf';
+import { Group } from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import MTL from './leaf.mtl';
@@ -15,7 +13,6 @@ class Leaves extends Group {
             objLoader.setMaterials(materials);
             objLoader.load(OBJ, function(model) {
                 model.scale.set(Math.random() * 0.03 , Math.random() * 0.03 , Math.random() * 0.03);
-                // model.rotation.y = Math.PI; // Math.random() * Math.PI / 4 - Math.PI / 2;
                 model.rotation.x = -0.9 * Math.PI / 2;
                 scene.castShadow = true;
                 scene.add(model);
@@ -28,13 +25,10 @@ class Leaves extends Group {
 
         // Init state
         this.state = {
-            // cloudTime: 2000,
-            // x: 0,
-            // parent: parent
             threshold: Math.random() * 2 + 1
         };
         this.addLeaf();
-        this.position.x = 7 + Math.random() * 2;
+        this.position.x = 7.3 + Math.random() * 2;
         this.position.y = 0.5;
         this.position.z = -1.5;
 
@@ -51,13 +45,6 @@ class Leaves extends Group {
         }
     }
 
-    pause() {
-        
-    }
-
-    resume() {
-
-    }
 }
 
 export default Leaves;

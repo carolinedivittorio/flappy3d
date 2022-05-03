@@ -1,6 +1,4 @@
-import { Group, Mesh } from 'three';
-import * as THREE from 'three';
-import MODEL from './scene.gltf';
+import { Group } from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import OBJ from './beachball.obj';
@@ -44,14 +42,6 @@ class Ball extends Group {
 
     update(timeStamp, stepSize) {
         this.position.x = this.position.x - stepSize;
-    }
-
-    pause() {
-        
-    }
-
-    resume() {
-
     }
 }
 

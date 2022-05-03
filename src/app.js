@@ -54,27 +54,6 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
-// let pausedContainer = document.createElement('div');
-// pausedContainer.id = 'paused';
-// document.body.appendChild(pausedContainer);
-
-// var paused = false;
-// let pausedContent = document.createElement('div');
-// pausedContent.id = 'paused-content';
-// pausedContainer.appendChild(pausedContent);
-
-// let pausedContentText = document.createElement('div');
-// pausedContentText.id = 'paused-text';
-// pausedContent.appendChild(pausedContentText);
-
-// let pausedContentTitleText = document.createElement('h1');
-// pausedContentTitleText.innerText = 'PAUSED';
-// pausedContentText.appendChild(pausedContentTitleText);
-
-// let pausedContentDescription = document.createElement('p');
-// pausedContentDescription.innerHTML = 'Press the p key to unpause!';
-// pausedContentText.appendChild(pausedContentDescription);
-
 var welcomeDiv = document.createElement('div');
 var welcomeText = document.createElement('div');
 welcomeText.style.position = 'absolute';
@@ -181,13 +160,6 @@ controls.minDistance = 4;
 controls.maxDistance = 16;
 controls.update();
 
-// Pause the scene
-function pause() {
-    paused = true;
-    scene.state.pause = true;
-    return true;
-}
-
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
     controls.update();
@@ -230,10 +202,7 @@ windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
 
 document.body.onkeydown = function(e) {
-    if (e.key == ' ' && !scene.state.pause) {
-        if (scene.state === "waiting") {
-            fadeOutEffect();
-        }
+    if (e.key == ' ') {
         scene.press();
     } else if (e.key == 'x') {
         if (scene.isDead()) {
@@ -241,16 +210,6 @@ document.body.onkeydown = function(e) {
             document.getElementById('scoreText').innerHTML = '0';
 
         }
-    } else if (e.key == 'p') {
-        // if (!paused) {
-        //     pausedContainer.style.display = 'flex';
-        //     console.log("PAUSE");
-        // } else {
-        //     pausedContainer.style.display = 'none';
-        //     console.log("UNPAUSE");
-        // }
-        // paused = !paused;
-        // scene.state.pause = !scene.state.pause;
     }
 }
 

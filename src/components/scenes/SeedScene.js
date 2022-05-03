@@ -1,8 +1,7 @@
 import { Scene, Color } from 'three';
 import * as THREE from 'three';
 import { Bird, Pipe, Floor, Cloud, Snowman } from 'objects';
-import { BasicLights } from 'lights';
-import { Boat, Flake, Flower, Icicle, Leaves, Ocean, Hut } from '../objects';
+import { Flake, Flower, Leaves, Ocean} from '../objects';
 
 import { Tree } from '../objects/Tree';
 import { Shells } from '../objects/Shells';
@@ -26,7 +25,6 @@ class SeedScene extends Scene {
             frustum: frustum,
             floorHeight: -2,
             ceilingHeight: 3,
-            pause: false,
             season: 0,
             seasons_list: ["fall", "winter", "spring", "summer"],
             lastTree: 0
@@ -63,8 +61,6 @@ class SeedScene extends Scene {
                 var newFlower = new Flower(this);
                 this.add(newFlower);
             }
-            // var newHut = new Hut(this);
-            // this.add(newHut);
             
         } 
 
@@ -75,9 +71,6 @@ class SeedScene extends Scene {
             }
             var newOcean = new Ocean(this);
             this.add(newOcean);
-
-            var newBoat = new Boat(this);
-            this.add(newBoat);
 
             var newBall = new Ball(this);
             this.add(newBall);
@@ -116,46 +109,20 @@ class SeedScene extends Scene {
             directionalLight3.position.set(-10, 5, 4);
             directionalLight3.castShadow = false;
 
-        // this.add(directionalLight3);
         var directionalLight4 = new THREE.DirectionalLight(0xffffff, 0.7)
         directionalLight4.position.set(0, 10, -10);
         directionalLight4.castShadow = false;
-        // this.add(directionalLight4);
+    
         
     }
 
     addToUpdateList(object) {
         this.state.updateList.push(object);
     }
-
-    pause() {
-        if (this.state.pause) {
-            return;
-        }
-        this.state.pause = true;
-        for (const obj of this.state.updateList) {
-            obj.pause();
-        }
-    }
-
-    resume() {
-        if (!this.state.pause) {
-            return;
-        }
-        this.state.pause = false;
-        for (const obj of this.state.updateList) {
-            obj.resume();
-        }
-    }
-
     update(timeStamp) {
-            // Call update for each object in the updateList
-        if (this.state.pause) {
-            return;
-        }
+        // Call update for each object in the updateList
         if (this.state.steps > 2) {
             const newPipe = new Pipe(this);
-            // const newPipe = new Icicle(this);
             this.add(newPipe);
 
             if (this.state.seasons_list[this.state.season] === "spring") {
@@ -163,11 +130,6 @@ class SeedScene extends Scene {
                     var newFlower = new Flower(this);
                     this.add(newFlower);
                 }
-                // var prob = Math.random();
-                // if (prob < 0.1) {
-                //     var newHut = new Hut(this);
-                //     this.add(newHut);
-                // }
 
             }
 
@@ -197,11 +159,6 @@ class SeedScene extends Scene {
                 if (prob < 0.2) {
                     var newBall = new Ball(this);
                     this.add(newBall);
-                }
-                var prob = Math.random();
-                if (prob < 0.1) {
-                    var newBoat = new Boat(this);
-                    this.add(newBoat);
                 }
             }
             else if (this.state.seasons_list[this.state.season] === "winter") {
@@ -282,8 +239,6 @@ class SeedScene extends Scene {
                     var newFlower = new Flower(this);
                     this.add(newFlower);
                 }
-                // var newHut = new Hut(this);
-                // this.add(newHut);
             } 
 
             else if (this.state.seasons_list[this.state.season] == "summer") {
@@ -293,9 +248,6 @@ class SeedScene extends Scene {
                 }
                 var newOcean = new Ocean(this);
                 this.add(newOcean);
-
-                var newBoat = new Boat(this);
-                this.add(newBoat);
 
                 var newBall = new Ball(this);
                 this.add(newBall);
@@ -350,14 +302,6 @@ class SeedScene extends Scene {
         }
         var newBestScore = Math.max(bestScore, this.state.score);
         this.state.document.cookie = "bestScore=" + newBestScore;
-
-        // if (this.state.document.cookie === "") {
-        //     this.state.document.cookie = "bestScore=0";
-        // } else {
-        //     if (parseInt(this.state.document.cookie.split('=')[1]) < this.state.score) {
-        //         this.state.document.cookie = "bestScore=" + this.state.score;
-        //     }
-        // }
     }
 }
 

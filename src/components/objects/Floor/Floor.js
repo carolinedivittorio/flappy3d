@@ -1,7 +1,5 @@
 import { Group } from 'three';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-// import MODEL from './land.gltf';
 
 class Floor extends Group {
     constructor(parent) {
@@ -45,10 +43,7 @@ class Floor extends Group {
     }
 
     update(timeStamp, stepSize) {
-    //    var birdBox = new THREE.Sphere();
         var bird = this.state.parent.children[0];
-        // birdBox.radius = bird.children[0].geometry.boundingSphere.radius;
-        // birdBox.center = bird.position;
         var birdBox = new THREE.Box3().setFromObject(bird);
         var floorBox = new THREE.Box3().setFromObject(this.children[0]);
         var bankBox = new THREE.Box3().setFromObject(this.children[1]);
@@ -56,14 +51,6 @@ class Floor extends Group {
             bird.stop();
             this.parent.kill();
         }
-    }
-
-    pause() {
-
-    }
-
-    resume() {
-
     }
 }
 
