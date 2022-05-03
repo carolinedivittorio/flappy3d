@@ -2,7 +2,7 @@
 
 This project brings to life the classic iPhone game Flappy Bird by giving it a proper three-dimensional aesthetic. In this project, we reimplemented all of the features of the classic game, except that while the original game’s graphics are retro, pixelated, and two-dimensional, our game uses three-dimensional meshes, lighting, and shadows for a sharper, more realistic look. 
 
-[Online Demo](https://carolinedivittorio.github.io/flappy-3d/)
+[Online Demo](https://carolinedivittorio.github.io/flappy3d/)
 
 Created by Julia Ruskin and Caroline di Vittorio for Princeton's COS426: Computer Graphics, Spring 2022.
 
