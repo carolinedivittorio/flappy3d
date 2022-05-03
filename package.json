@@ -4,17 +4,16 @@
   "repository": "flappy3d",
   "version": "0.1.0",
   "title": "Play Flappy Bird 3D",
-  "description": "SHORT DESCRIPTION OF PROJECT HERE. ONE TO TWO SENTENCES MAX",
+  "description": "This project brings to life the classic iPhone game Flappy Bird by using three-dimensional meshes, lighting, and shadows for a sharper, more realistic look.",
   "keywords": [
     "Princeton",
     "graphics",
     "three.js",
     "COS 426",
-    "ivy league",
-    "keyword1",
-    "keyword2",
-    "...",
-    "this last entry CANNOT have a comma after it ->"
+    "Flappy Bird",
+    "Flappy",
+    "Bird",
+    "Game"
   ],
   "scripts": {
     "start": "webpack-dev-server --mode development --output-public-path \"\"",
