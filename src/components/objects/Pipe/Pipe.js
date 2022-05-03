@@ -17,7 +17,7 @@ class Pipe extends Group {
          }
     
         const totalLength = parent.state.ceilingHeight - parent.state.floorHeight;
-        const gapLength = totalLength * 0.35;
+        const gapLength = totalLength * 0.4;
         const minLength = totalLength * 0.15;
         const hatLength = totalLength * 0.05;
         const offset = Math.random() * (totalLength - gapLength - 2 * minLength - 2 * hatLength);

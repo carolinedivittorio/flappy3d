@@ -30,13 +30,13 @@ class Snowman extends Group {
             var objLoader = new OBJLoader();
             objLoader.setMaterials(materials);
             objLoader.load(OBJ, function(model) {
-                model.scale.set(1, 1, 1);
+                model.scale.set(0.75, 0.75, 0.75);
                 scene.add(model);
             });
             });
         this.position.x = 10 + Math.random() * 2;
         this.position.y = -2;
-        this.position.z = -1 - Math.random() * 3;
+        this.position.z = -1.5;
         this.scale.set(0.5, 0.5, 0.5)
 
         // Add self to parent's update list
