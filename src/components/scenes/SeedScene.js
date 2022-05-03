@@ -27,7 +27,7 @@ class SeedScene extends Scene {
             ceilingHeight: 3,
             season: 0,
             seasons_list: ["fall", "winter", "spring", "summer"],
-            lastTree: 0
+            lastTree: 0,
         };
 
         // Set background to a nice color
@@ -65,7 +65,7 @@ class SeedScene extends Scene {
         } 
 
         else if (this.state.seasons_list[this.state.season] == "summer") {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 5; i++) {
                 var newShell = new Shells(this);
                 this.add(newShell);
             }
@@ -151,7 +151,7 @@ class SeedScene extends Scene {
             }
 
             else if (this.state.seasons_list[this.state.season] === "summer") {
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 5; i++) {
                     var newShell = new Shells(this);
                     this.add(newShell);
                 }
@@ -176,7 +176,6 @@ class SeedScene extends Scene {
         var step = this.state.gameState === "active" ? 0.01 * Math.pow(1.035, this.state.score) : 0;
 
         this.state.steps += step;
-
         for (const obj of this.state.updateList) {
             obj.update(timeStamp, step);
             
@@ -242,7 +241,7 @@ class SeedScene extends Scene {
             } 
 
             else if (this.state.seasons_list[this.state.season] == "summer") {
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 5; i++) {
                     var newShell = new Shells(this);
                     this.add(newShell);
                 }
